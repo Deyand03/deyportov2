@@ -2,10 +2,12 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+
 body {
   overflow-x: hidden;
 }
 
+/* --- SCROLLBAR STYLING --- */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -19,27 +21,28 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary);
 }
+
+/* --- VIEW TRANSITION API (FIXED) --- */
+/* 1. Reset animasi default browser biar gak cross-fade */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
 }
 
+/* 2. Layer LAMA selalu di bawah */
 ::view-transition-old(root) {
   z-index: 1;
 }
 
+/* 3. Layer BARU selalu di atas (biar efek spread kelihatan) */
 ::view-transition-new(root) {
   z-index: 9999;
 }
 
-.dark::view-transition-old(root) {
-  z-index: 9999;
-}
+/* HAPUS blok .dark override yang bikin z-index kebalik disini */
 
-.dark::view-transition-new(root) {
-  z-index: 1;
-}
+/* --- TAILWIND THEME CONFIG --- */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
