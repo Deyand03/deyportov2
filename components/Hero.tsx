@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ArrowRight, Download, MousePointerClick } from "lucide-react";
+import { Download, MousePointerClick } from "lucide-react";
 import BlurText from "./BlurText";
 import LightRays from "./LightRays";
 import TextType from "./TextType";
@@ -51,10 +51,16 @@ const Hero = () => {
                     {/* Main Headline */}
                     <div className="space-y-2">
                         <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-foreground leading-tight">
-                            Hello, I&apos;m <br className="hidden md:block" />
-                            <span className="text-black dark:text-white animate-gradient-x">
-                                Defry Yandy
-                            </span>
+                            <BlurText
+                                text="Hello, I'm"
+                                className="dark:text-white text-black flex justify-center md:justify-start"
+                                animateBy="letters"
+                            />
+                            <BlurText
+                                text="Defry Yandy"
+                                className="dark:text-white text-black flex justify-center md:justify-start"
+                                animateBy="letters"
+                            />
                         </h1>
                     </div>
 
@@ -85,7 +91,11 @@ const Hero = () => {
                     </div>
 
                     {/* CV Buttons */}
-                    <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
+                    <motion.div
+                        initial={{scale: 0.85}}
+                        animate={{scale: 1}}
+                        transition={{delay: 0.8, duration: 0.5, ease: "easeOut"}}
+                        className="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
                         <a
                             href="/MyCV.pdf"
                             className="group relative px-8 py-3 rounded-full bg-foreground text-background font-bold hover:bg-foreground/90 transition-all flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-1"
@@ -93,7 +103,7 @@ const Hero = () => {
                             My CV
                             <Download className="w-4 h-4 group-hover:animate-bounce" />
                         </a>
-                    </div>
+                    </motion.div>
                 </motion.div>
 
                 {/* RIGHT SIDE: Interactive 3D/Lanyard */}
