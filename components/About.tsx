@@ -1,10 +1,15 @@
 "use client";
-import { motion, useScroll, useTransform } from "motion/react";
+import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
 import ScrollVelocity from "./ScrollVelocity";
 import { Code, CodeHeader, CodeBlock } from "./animate-ui/components/animate/code";
-import { FaReact, FaGamepad, FaCode, FaPaintBrush } from "react-icons/fa";
-import { Terminal, Cpu, Coffee } from "lucide-react";
-import { useRef } from "react";
+import { FaReact, FaPaintBrush } from "react-icons/fa";
+import { SiBun, SiFramer, SiGit, SiGithub, SiGodotengine, SiHtml5, SiHyperskill, SiJavascript, SiLaravel, SiMediapipe, SiMysql, SiNpm, SiPhp, SiPnpm, SiPostgresql, SiPython, SiReact, SiSupabase, SiTailwindcss, SiTypescript, SiVercel } from "react-icons/si";
+import { Cpu, Coffee } from "lucide-react";
+import { useRef, useState } from "react";
+import BlurText from "./BlurText";
+import SplitText from "./SplitText";
+import LogoLoop from "./LogoLoop";
+import Image from "next/image";
 
 const About = () => {
     const myCode = `import { Developer, Human } from 'earth';
@@ -24,17 +29,19 @@ const Defry = () => {
       <p>
         Seorang Mahasiswa Sistem Informasi yang 
         memiliki ketertarikan besar terhadap logika 
-        dan estetika digital.
+        dan estetika digital. Lebih suka memahami konsep
+        di balik solusi sebelum menulis kode, agar sistem
+        yang dibuat lebih scalable dan mudah dikembangkan.
       </p>
 
       <p>
         Saat ini saya fokus menciptakan web modern
-        dan mengembangkan game interaktif.
-        Project favorit saya? Hand Gesture Control!
+        dan mengembangkan game 2D dari Godot.
+        Project favorit saya? Game!
       </p>
       
       {/* Ketika tidak coding, saya mungkin sedang 
-        menggambar atau menikmati kopi santai. 
+        menggambar, nonton anime atau bermain game santai. 
       */}
     </div>
   );
@@ -42,6 +49,7 @@ const Defry = () => {
 
 export default Defry;
 `;
+    const [activeDraw, setActiveDraw] = useState<string | null>(null);
 
     const aboutRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
@@ -51,6 +59,40 @@ export default Defry;
 
     const scale = useTransform(scrollYProgress, [0, 1], [1, 0.80]);
     const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+
+    const drawings = [
+        "/drawing/drawRealism.jpg",
+        "/drawing/drawShoko.jpg",
+        "/drawing/drawNime2.jpg",
+        "/drawing/drawNime.jpg",
+        "/drawing/drawMedieval.jpg",
+    ]
+
+    const skillsLogo = [
+        { node: <SiReact />, title: "React" },
+        { node: <SiLaravel />, title: "Laravel" },
+        { node: <SiMysql />, title: "MySql" },
+        { node: <SiPostgresql />, title: "PostgreSql" },
+        { node: <SiTypescript />, title: "TypeScript" },
+        { node: <SiPhp />, title: "Php" },
+        { node: <SiJavascript />, title: "JavaScript" },
+        { node: <SiHtml5 />, title: "HTML" },
+        { node: <SiTailwindcss />, title: "Tailwindcss" },
+        { node: <SiPython />, title: "Python" },
+        { node: <SiMediapipe />, title: "Mediapipe" },
+        { node: <SiFramer />, title: "Framer Motion" },
+    ];
+
+    const toolsTech = [
+        { node: <SiGithub />, title: "Github" },
+        { node: <SiGit />, title: "Git" },
+        { node: <SiVercel />, title: "Vercel" },
+        { node: <SiSupabase />, title: "Supabase" },
+        { node: <SiGodotengine />, title: "Godot Engine" },
+        { node: <SiNpm />, title: "Npm" },
+        { node: <SiPnpm />, title: "Pnpm" },
+        { node: <SiBun />, title: "Bun" }
+    ];
 
     return (
         <section ref={aboutRef} className="h-full w-full bg-background relative overflow-hidden">
@@ -86,8 +128,8 @@ export default Defry;
 
                     {/* Main Content Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-full">
-                        <div className="md:col-span-8 w-full h-full min-h-[400px] md:min-h-[500px]">
-                            <div className="h-[890px] border border-black/10 dark:border-white/10 rounded-xl overflow-hidden shadow-sm bg-white dark:bg-black/20">
+                        <div className="col-span-12 md:col-span-6 w-full h-full min-h-100 md:min-h-125">
+                            <div className="h-200 border border-black/10 dark:border-white/10 rounded-xl overflow-hidden shadow-sm bg-white dark:bg-black/20">
                                 <Code
                                     code={myCode}
                                     className="w-full h-full font-mono text-sm md:text-base"
@@ -106,13 +148,10 @@ export default Defry;
                                         lang="typescript"
                                         writing={true}
                                         delay={200}
-                                        duration={15000} // Ngetik 4 detik biar user sempet baca
+                                        duration={15000}
                                         cursor={true}
                                         inView={true}
                                         style={{
-                                            fontSize: '0.9rem',
-                                            lineHeight: '1.6',
-                                            padding: '1.5rem',
                                             backgroundColor: 'transparent'
                                         }}
                                     />
@@ -120,51 +159,107 @@ export default Defry;
                             </div>
                         </div>
 
-                        {/* RIGHT COL: INFO STACK (Pelengkap - 4 Kolom) */}
-                        <div className="md:col-span-4 flex flex-col gap-6">
-
-                            {/* Box 1: Focus Area */}
-                            <div className="flex-1 border border-black/10 dark:border-white/10 rounded-xl p-6 bg-gray-50/50 dark:bg-white/5 backdrop-blur-sm flex flex-col justify-center gap-4 hover:border-black/30 transition-colors">
-                                <div className="flex items-center gap-2 mb-2 text-muted-foreground">
-                                    <Terminal size={18} />
-                                    <span className="text-xs font-bold uppercase tracking-wider">Core Focus</span>
-                                </div>
-                                <div className="space-y-3">
-                                    <div className="flex items-center gap-3">
-                                        <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-md text-blue-600">
-                                            <FaCode size={20} />
-                                        </div>
-                                        <div>
-                                            <h3 className="font-semibold text-sm">Web Development</h3>
-                                            <p className="text-xs text-muted-foreground">Next.js & Laravel Ecosystem</p>
-                                        </div>
+                        {/* RIGHT COL */}
+                        <div className="col-span-12 md:col-span-6 flex flex-col gap-6 overflow-hidden">
+                            {/* Box 1*/}
+                            <div className="flex-1 border border-black/10 dark:border-white/10 rounded-xl p-6 bg-gray-50/50 dark:bg-white/5 backdrop-blur-sm flex flex-col gap-4 hover:border-black/30 transition-colors">
+                                <div className="flex items-center gap-3">
+                                    <div className="rounded bg-background shadow-md shadow-orange-500/30 dark:shadow dark:shadow-white p-2">
+                                        <SiHyperskill />
                                     </div>
-                                    <div className="flex items-center gap-3">
-                                        <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-md text-purple-600">
-                                            <FaGamepad size={20} />
-                                        </div>
-                                        <div>
-                                            <h3 className="font-semibold text-sm">Game Development</h3>
-                                            <p className="text-xs text-muted-foreground">Godot & Interactive Logic</p>
-                                        </div>
+                                    <h1 className="text-xl font-semibold">Tech Stack</h1>
+                                </div>
+                                <div className="border-l-4 border-l-gray-400 pl-4 rounded">
+                                    <div className="flex flex-col items-start justify-center h-full">
+                                        <BlurText
+                                            text="Tech I often use"
+                                        />
+                                        <SplitText
+                                            text="Laravel, React, Next.js, Tailwind CSS, Flutter, Godot Engine, Git, etc."
+                                            className="text-start"
+                                        />
                                     </div>
                                 </div>
-                            </div>
-
-                            {/* Box 2: Soft Skills / Interests */}
-                            <div className="flex-1 border border-black/10 dark:border-white/10 rounded-xl p-6 bg-gray-50/50 dark:bg-white/5 backdrop-blur-sm flex flex-col justify-center gap-4 hover:border-black/30 transition-colors">
-                                <div className="flex items-center gap-2 mb-2 text-muted-foreground">
-                                    <Cpu size={18} />
-                                    <span className="text-xs font-bold uppercase tracking-wider">Beyond Code</span>
+                                <div className="flex flex-col gap-3">
+                                    <LogoLoop
+                                        logos={skillsLogo}
+                                        speed={60}
+                                        direction="left"
+                                        logoHeight={32}
+                                        gap={40}
+                                        hoverSpeed={0}
+                                        scaleOnHover
+                                        fadeOut={true}
+                                    />
+                                    <LogoLoop
+                                        logos={toolsTech}
+                                        speed={60}
+                                        direction="right"
+                                        logoHeight={32}
+                                        gap={40}
+                                        hoverSpeed={0}
+                                        scaleOnHover
+                                        fadeOut={true}
+                                    />
                                 </div>
-                                <div className="grid grid-cols-2 gap-3">
-                                    <div className="flex flex-col items-center justify-center p-3 rounded-lg bg-white dark:bg-black/20 border border-black/5">
-                                        <FaPaintBrush className="mb-2 opacity-70" />
-                                        <span className="text-xs font-medium">Artist</span>
+                                <div className="flex items-center gap-3 mt-3">
+                                    <div className="rounded bg-background shadow-md shadow-orange-500/30 dark:shadow dark:shadow-white p-2">
+                                        <FaPaintBrush />
                                     </div>
-                                    <div className="flex flex-col items-center justify-center p-3 rounded-lg bg-white dark:bg-black/20 border border-black/5">
-                                        <Coffee className="mb-2 opacity-70" />
-                                        <span className="text-xs font-medium">Coffee</span>
+                                    <h1 className="text-xl font-semibold">Art Gallery</h1>
+                                </div>
+                                <div className="flex w-full h-full">
+                                    <div className="grid grid-cols-12 gap-3 w-full h-full">
+                                        {/* Left: Thumbnail Draw */}
+                                        <div className="col-span-4 aspect-4/6 grid grid-cols-2 gap-2 w-full">
+                                            {drawings.map((src, idx) => (
+                                                <div
+                                                    key={idx}
+                                                    onMouseEnter={() => setActiveDraw(src)}
+                                                    onMouseLeave={() => setActiveDraw(null)}
+                                                    className="relative aspect-square rounded-md bg-white dark:bg-black/20 border border-black/5 overflow-hidden cursor-pointer hover:ring-2 hover:ring-blue-400/50 transition-all hover:scale-105"
+                                                >
+                                                    <Image
+                                                        src={src}
+                                                        alt={`Art ${idx + 1}`}
+                                                        fill
+                                                        className="object-cover"
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+                                        {/* Right: Preview */}
+                                        <div className="col-span-8 w-full h-full border rounded-xl overflow-hidden aspect-7/8">
+                                            <AnimatePresence mode="wait">
+                                                {activeDraw ? (
+                                                    <motion.div
+                                                        key={activeDraw}
+                                                        initial={{ opacity: 0, scale: 0.95, filter: "blur(4px)" }}
+                                                        animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                                                        exit={{ opacity: 0, filter: "blur(4px)" }}
+                                                        transition={{ duration: 0.35, ease: "easeInOut" }}
+                                                        className="relative w-full h-full"
+                                                    >
+                                                        <Image
+                                                            src={activeDraw}
+                                                            alt="Preview"
+                                                            fill
+                                                            className="object-cover"
+                                                        />
+                                                    </motion.div>
+                                                ) : (
+                                                    <motion.div
+                                                        initial={{ opacity: 0 }}
+                                                        animate={{ opacity: 1 }}
+                                                        className="text-center px-4 flex justify-center items-center h-full"
+                                                    >
+                                                        <p className="text-xs text-muted-foreground font-medium leading-relaxed">
+                                                            Hover art Left<br />to preview details
+                                                        </p>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

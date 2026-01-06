@@ -23,7 +23,6 @@ interface NavItem {
 const navItems: NavItem[] = [
     { name: "Home", href: "#hero", icon: Home },
     { name: "About", href: "#about", icon: User },
-    { name: "Skills", href: "#skills", icon: Code2 },
     { name: "Projects", href: "#projects", icon: Briefcase },
     { name: "Contact", href: "#contact", icon: Mail },
 ];
@@ -66,7 +65,7 @@ export function Navbar() {
                     >
                         {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
-                    <div className="h-6 w-[1px] bg-white/20 mx-2" />
+                    <div className="h-6 w-px bg-white/20 mx-2" />
                     <ThemeToggle />
                 </div>
             </motion.nav>
@@ -178,7 +177,7 @@ function ThemeToggle() {
         });
     };
 
-    if (!mounted) return <div className="w-10 h-10" />; 
+    if (!mounted) return <div className="w-10 h-10" />;
 
     return (
         <button

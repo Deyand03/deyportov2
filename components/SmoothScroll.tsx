@@ -8,8 +8,8 @@ interface SmoothScrollProps {
 
 function SmoothScroll({ children }: SmoothScrollProps) {
     const lenisOptions = {
-        lerp: 0.01,
-        duration: 1.5,
+        lerp: 0.1,
+        duration: 1,
         smoothWheel: true,
         wheelMultiplier: 1,
         touchMultiplier: 2,
