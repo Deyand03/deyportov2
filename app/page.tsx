@@ -2,7 +2,7 @@
 import About from "@/components/About";
 import ClickSpark from "@/components/ClickSpark";
 import Hero from "@/components/Hero";
-import Skills from "@/components/Skills";
+import Projects from "@/components/Projects";
 import useSound from "use-sound";
 
 const Home = () => {
@@ -16,27 +16,9 @@ const Home = () => {
         sparkCount={8}
         duration={400}
       >
-        <section className="sticky top-0 h-screen z-0">
-          <Hero />
-        </section>
-
-        <section className="sticky top-0 z-10 min-h-screen bg-background border-t border-white/10 overflow-hidden">
-          <div className="container mx-auto px-6 pt-20">
-            <About />
-          </div>
-        </section>
-
-        <section className="sticky top-0 z-20 min-h-screen bg-background border-t border-white/10 overflow-hidden">
-          <div className="container mx-auto px-6 pt-20">
-            <Skills />
-          </div>
-        </section>
-
-        <section className="sticky top-0 z-30 min-h-screen bg-background border-t border-white/10 overflow-hidden">
-          <div className="container mx-auto px-6 pt-20">
-            project
-          </div>
-        </section>
+        <Hero />
+        <About />
+        <Projects />
       </ClickSpark>
     </main>
   )

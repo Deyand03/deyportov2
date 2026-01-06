@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useTheme } from "next-themes";
@@ -14,17 +13,13 @@ import {
     Menu,
     X
 } from "lucide-react";
-import { cn } from "@/lib/utils"; // Pastikan punya utility cn dari shadcn/clsx
-
-// --- TYPE DEFINITIONS ---
-// Interface untuk Navigasi
+import { cn } from "@/lib/utils";
 interface NavItem {
     name: string;
     href: string;
     icon: React.ElementType;
 }
 
-// Data Menu Navigasi
 const navItems: NavItem[] = [
     { name: "Home", href: "#hero", icon: Home },
     { name: "About", href: "#about", icon: User },
@@ -37,7 +32,6 @@ export function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    // Deteksi scroll buat nambah efek shadow/background kalau discroll
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
@@ -57,36 +51,26 @@ export function Navbar() {
                 <div
                     className={cn(
                         "flex items-center gap-2 p-2 rounded-full transition-all duration-300 ease-in-out",
-                        // Style Glassmorphism & Border
                         "bg-white/10 dark:bg-black/20 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-xl",
-                        // Kalau discroll, mungkin mau dibikin lebih solid atau lebar, tapi ini default dock style
                         isScrolled ? "shadow-2xl bg-white/20 dark:bg-black/40" : ""
                     )}
                 >
-                    {/* Desktop Menu (Hidden di Mobile) */}
                     <div className="hidden md:flex items-center gap-1">
                         {navItems.map((item) => (
                             <NavLink key={item.name} item={item} />
                         ))}
                     </div>
-
-                    {/* Mobile Menu Toggle */}
                     <button
                         className="md:hidden p-3 rounded-full hover:bg-white/20 dark:hover:bg-white/10 transition-colors"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     >
                         {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
-
-                    {/* Separator Line */}
                     <div className="h-6 w-[1px] bg-white/20 mx-2" />
-
-                    {/* Theme Toggle Button (Circular Reveal Logic Inside) */}
                     <ThemeToggle />
                 </div>
             </motion.nav>
 
-            {/* Mobile Menu Dropdown (Optional implementation) */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
@@ -113,9 +97,6 @@ export function Navbar() {
     );
 }
 
-// --- SUB COMPONENTS ---
-
-// 1. Link Item dengan Animasi Hover
 function NavLink({ item }: { item: NavItem }) {
     const [isHovered, setIsHovered] = useState(false);
 
@@ -127,7 +108,6 @@ function NavLink({ item }: { item: NavItem }) {
             onMouseLeave={() => setIsHovered(false)}
         >
             <span className="relative z-10 flex items-center gap-2">
-                {/* Icon muncul cuma pas hover atau bisa selalu muncul tergantung selera Defry */}
                 {isHovered && (
                     <motion.span
                         initial={{ width: 0, opacity: 0 }}
@@ -140,7 +120,6 @@ function NavLink({ item }: { item: NavItem }) {
                 {item.name}
             </span>
 
-            {/* Background Pill Hover Animation */}
             {isHovered && (
                 <motion.div
                     layoutId="navbar-hover"
@@ -155,10 +134,8 @@ function NavLink({ item }: { item: NavItem }) {
     );
 }
 
-// 2. Theme Toggle dengan Circular Reveal (Spread Animation)
 function ThemeToggle() {
     const { theme, setTheme } = useTheme();
-    // State mounted untuk menghindari hydration mismatch
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -166,7 +143,6 @@ function ThemeToggle() {
     }, []);
 
     const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
-        // Fallback jika browser tidak support View Transitions API
         if (!(document as any).startViewTransition) {
             setTheme(theme === "dark" ? "light" : "dark");
             return;
