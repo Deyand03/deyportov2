@@ -217,7 +217,7 @@ export default Defry;
                                                     key={idx}
                                                     onMouseEnter={() => setActiveDraw(src)}
                                                     onMouseLeave={() => setActiveDraw(null)}
-                                                    className="relative aspect-square rounded-md bg-white dark:bg-black/20 border border-black/5 overflow-hidden cursor-pointer hover:ring-2 hover:ring-blue-400/50 transition-all hover:scale-105"
+                                                    className="relative aspect-square rounded-md bg-white dark:bg-white/60 border border-black/60 overflow-hidden cursor-pointer hover:ring-2 hover:ring-blue-400/50 transition-all hover:scale-105"
                                                 >
                                                     <Image
                                                         src={src}
