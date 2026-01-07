@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { motion, isMotionComponent, type HTMLMotionProps } from 'motion/react';
 import { cn } from '@/lib/utils';
+import { Component } from 'lucide-react';
 
 type AnyProps = Record<string, unknown>;
 
@@ -63,6 +64,8 @@ function Slot<T extends HTMLElement = HTMLElement>({
   ref,
   ...props
 }: SlotProps<T>) {
+  if (!React.isValidElement(children)) return null;
+
   const isAlreadyMotion =
     typeof children.type === 'object' &&
     children.type !== null &&
@@ -76,14 +79,15 @@ function Slot<T extends HTMLElement = HTMLElement>({
     [isAlreadyMotion, children.type],
   );
 
-  if (!React.isValidElement(children)) return null;
-
   const { ref: childRef, ...childProps } = children.props as AnyProps;
 
   const mergedProps = mergeProps(childProps, props);
-
+  const Component = Base as any;
   return (
-    <Base {...mergedProps} ref={mergeRefs(childRef as React.Ref<T>, ref)} />
+    <Component
+      {...mergedProps}
+      ref={mergeRefs(childRef as React.Ref<T>, ref) as unknown as React.Ref<any>}
+    />
   );
 }
 
