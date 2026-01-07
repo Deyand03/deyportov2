@@ -5,7 +5,6 @@ import { useTheme } from "next-themes";
 import {
     Home,
     User,
-    Code2,
     Briefcase,
     Mail,
     Sun,
@@ -17,7 +16,7 @@ import { cn } from "@/lib/utils";
 interface NavItem {
     name: string;
     href: string;
-    icon: React.ElementType;
+    icon: React.ComponentType<{ size?: number | string }>;
 }
 
 const navItems: NavItem[] = [
