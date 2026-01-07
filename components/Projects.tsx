@@ -18,13 +18,9 @@ const Projects = () => {
 
     return (
         <section ref={projectsRef}>
-            <ScrollVelocity
-                texts={['BUILD • CODE • DEPLOY • INNOVATE • SOLVE •']}
-                className="opacity-5 dark:opacity-10 text-4xl md:text-6xl font-black py-2 uppercase tracking-tighter mb-4"
-            />
             <motion.div
                 style={{ scale, opacity }}
-                className="container mx-auto px-4 md:px-20"
+                className="container mx-auto py-20 px-4 md:px-20"
             >
                 {/* Header */}
                 <div className="flex justify-between items-center border-b-2 pb-2">
@@ -42,10 +38,10 @@ const Projects = () => {
                         ListProject
                     </div>
                     {/* Card Swap */}
-                    <div className="col-span-1 md:col-span-5">
-                        <div className="relative h-80 md:h-120 md:w-full">
+                    <div className="col-span-1 md:col-span-5 h-full">
+                        <div className="relative h-80 md:h-120">
                             <div className="flex gap-2 items-center justify-center md:pt-16 uppercase font-bold tracking-tight text-3xl">
-                                <SiPinboard/>
+                                <SiPinboard />
                                 Featured.
                             </div>
                             <CardSwap
@@ -56,10 +52,10 @@ const Projects = () => {
                             >
                                 <Card>
                                     <h3 className="flex items-center gap-2 text-foreground border-b border-foreground p-2">
-                                        <FaCode /> 
+                                        <FaCode />
                                         <span className="font-semibold tracking-tight">Deyporto</span>
                                     </h3>
-                                    <Image 
+                                    <Image
                                         src={"/projects/portov2.png"}
                                         alt="Portofolio V2"
                                         fill
@@ -68,10 +64,10 @@ const Projects = () => {
                                 </Card>
                                 <Card>
                                     <h3 className="flex items-center gap-2 text-foreground border-b border-foreground p-2">
-                                        <FaCode /> 
+                                        <FaCode />
                                         <span className="font-semibold tracking-tight">KenalBersih</span>
                                     </h3>
-                                    <Image 
+                                    <Image
                                         src={"/projects/kenalbersih.png"}
                                         alt="kenalbersih"
                                         fill
@@ -80,10 +76,10 @@ const Projects = () => {
                                 </Card>
                                 <Card>
                                     <h3 className="flex items-center gap-2 text-foreground border-b border-foreground p-2">
-                                        <FaCode /> 
+                                        <FaCode />
                                         <span className="font-semibold tracking-tight">Interngate</span>
                                     </h3>
-                                    <Image 
+                                    <Image
                                         src={"/projects/interngate.png"}
                                         alt="Interngate"
                                         fill

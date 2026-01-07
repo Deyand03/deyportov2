@@ -95,17 +95,12 @@ export default Defry;
     ];
 
     return (
-        <section ref={aboutRef} className="h-full w-full bg-background relative overflow-hidden">
-            <div className="mb-8 pt-10">
-                <ScrollVelocity
-                    texts={['WEB DEV • GAME DEV • ARTIST • LOGIC • CREATIVE •']}
-                    className="opacity-10 dark:opacity-20 text-4xl md:text-6xl font-black py-2 uppercase tracking-tighter"
-                />
-            </div>
+        <section ref={aboutRef} className="h-full w-full bg-background relative overflow-hidden py-20">
+            
             <motion.div
                 style={{ scale, opacity }}
             >
-                <div className="px-6 md:px-20 pb-20">
+                <div className="px-4 md:px-20 pb-20">
                     {/* Header Section */}
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 border-b border-black/10 dark:border-white/10 pb-6">
                         <div>
