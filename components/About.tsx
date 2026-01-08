@@ -143,7 +143,7 @@ export default Defry;
                                         lang="typescript"
                                         writing={true}
                                         delay={200}
-                                        duration={15000}
+                                        duration={10000}
                                         cursor={true}
                                         inView={true}
                                         style={{
