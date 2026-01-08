@@ -172,7 +172,7 @@ const Hero = () => {
                         </div>
 
                         <div className="flex items-center gap-2 text-xl md:text-3xl font-semibold text-gray-700 dark:text-gray-300">
-                            <span>I&apos;m a</span>
+                            <span>I&apos;m an</span>
                             <div className="text-yellow-500 dark:text-blue-400 min-w-50 text-left">
                                 <TextType
                                     text={["Web Developer.", "Game Developer.", "Artist."]}

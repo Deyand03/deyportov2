@@ -49,7 +49,7 @@ const Defry = () => {
 
 export default Defry;
 `;
-    const [activeDraw, setActiveDraw] = useState<string | null>(null);
+    const [activeDraw, setActiveDraw] = useState<string | null>('/drawing/drawMedieval.jpg');
 
     const aboutRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
@@ -211,7 +211,6 @@ export default Defry;
                                                 <div
                                                     key={idx}
                                                     onMouseEnter={() => setActiveDraw(src)}
-                                                    onMouseLeave={() => setActiveDraw(null)}
                                                     className="relative aspect-square rounded-md bg-white dark:bg-white/60 border border-black/60 overflow-hidden cursor-pointer hover:ring-2 hover:ring-blue-400/50 transition-all hover:scale-105"
                                                 >
                                                     <Image
@@ -232,14 +231,14 @@ export default Defry;
                                                         initial={{ opacity: 0, scale: 0.95, filter: "blur(4px)" }}
                                                         animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                                                         exit={{ opacity: 0, filter: "blur(4px)" }}
-                                                        transition={{ duration: 0.35, ease: "easeInOut" }}
+                                                        transition={{ duration: 0.35, ease: "easeOut" }}
                                                         className="relative w-full h-full"
                                                     >
                                                         <Image
                                                             src={activeDraw}
                                                             alt="Preview"
                                                             fill
-                                                            className="object-cover"
+                                                            className="object-contain"
                                                         />
                                                     </motion.div>
                                                 ) : (
