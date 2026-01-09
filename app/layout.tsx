@@ -13,7 +13,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Deyporto",
-  description: "Web Developer | Game Developer | Artist",
+  description: "Halo, saya Defry, seorang Fullstack Developer dan juga Game Developer",
 };
 
 export default function RootLayout({

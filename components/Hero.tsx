@@ -5,7 +5,6 @@ import { Download, MousePointerClick, CalendarDays, MapPin } from "lucide-react"
 import BlurText from "./BlurText";
 import LightRays from "./LightRays";
 import TextType from "./TextType";
-import Lanyard from "./Lanyard";
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import Image from "next/image";
 import {
@@ -16,11 +15,23 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Shine } from "./animate-ui/primitives/effects/shine";
 import Link from "next/link";
+import { useRef } from "react";
+import dynamic from "next/dynamic";
+import useIsMobile from "@/hooks/use-is-mobile";
+const Lanyard = dynamic(() => import('./Lanyard'));
+
 
 const Hero = () => {
-    const { scrollY } = useScroll();
+    const heroRef = useRef<HTMLDivElement>(null);
+    const { scrollY } = useScroll({
+        target: heroRef,
+        offset: ["end end", "end start"]
+    });
+    const isMobile = useIsMobile();
+
     const scale = useTransform(scrollY, [0, 500], [1, 0.8]);
     const opacity = useTransform(scrollY, [0, 500], [1, 0]);
+    const blur = useTransform(scrollY, [0, 100], ["blur(0px)", "blur(4px)"]);
 
     const socialLinks = [
         {
@@ -123,9 +134,9 @@ const Hero = () => {
     ];
 
     return (
-        <section className="relative w-full h-screen overflow-hidden bg-background">
+        <section ref={heroRef} className="relative w-full h-screen overflow-hidden">
             <motion.div
-                style={{ scale, opacity }}
+                style={{ scale, opacity, filter: blur }}
                 className="w-full h-full relative"
             >
                 <div className="absolute inset-0 z-0 pointer-events-none">
@@ -229,8 +240,7 @@ const Hero = () => {
                             </Shine>
                         </motion.div>
                     </motion.div>
-
-                    <motion.div
+                    {!isMobile && <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
@@ -249,6 +259,7 @@ const Hero = () => {
                             <span>Drag the card!</span>
                         </motion.div>
                     </motion.div>
+                    }
                 </div>
 
                 <motion.div

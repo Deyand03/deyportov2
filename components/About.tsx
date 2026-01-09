@@ -1,10 +1,8 @@
 "use client";
 import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
-import ScrollVelocity from "./ScrollVelocity";
 import { Code, CodeHeader, CodeBlock } from "./animate-ui/components/animate/code";
 import { FaReact, FaPaintBrush } from "react-icons/fa";
 import { SiBun, SiFramer, SiGit, SiGithub, SiGodotengine, SiHtml5, SiHyperskill, SiJavascript, SiLaravel, SiMediapipe, SiMysql, SiNpm, SiPhp, SiPnpm, SiPostgresql, SiPython, SiReact, SiSupabase, SiTailwindcss, SiTypescript, SiVercel } from "react-icons/si";
-import { Cpu, Coffee } from "lucide-react";
 import { useRef, useState } from "react";
 import BlurText from "./BlurText";
 import SplitText from "./SplitText";
