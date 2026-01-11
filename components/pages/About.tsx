@@ -1,7 +1,7 @@
 "use client";
 import { motion, useScroll, useTransform } from "motion/react";
-import { FaReact, FaPaintBrush, FaTools } from "react-icons/fa";
-import { SiBun, SiFramer, SiGit, SiGithub, SiGodotengine, SiHtml5, SiHyperskill, SiJavascript, SiLaravel, SiMediapipe, SiMysql, SiNpm, SiPersonio, SiPhp, SiPnpm, SiPostgresql, SiPython, SiReact, SiSupabase, SiTailwindcss, SiTypescript, SiVercel } from "react-icons/si";
+import { FaPaintBrush, FaTools } from "react-icons/fa";
+import { SiBun, SiFramer, SiGit, SiGithub, SiGodotengine, SiHtml5, SiJavascript, SiLaravel, SiMediapipe, SiMysql, SiNpm, SiPhp, SiPnpm, SiPostgresql, SiPython, SiReact, SiSupabase, SiTailwindcss, SiTypescript, SiVercel } from "react-icons/si";
 import { useRef } from "react";
 import { Meteors } from "../ui/meteors";
 import { IoPerson } from "react-icons/io5";
