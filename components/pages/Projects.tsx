@@ -1,11 +1,112 @@
+"use client";
+
 import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
-import CardSwap, { Card } from "../CardSwap";
+import { Suspense, useRef } from "react";
 import Image from "next/image";
-import { FaCode, FaShare, FaVideoSlash } from "react-icons/fa";
-import { SiBootstrap, SiCss3, SiDaisyui, SiDart, SiFlutter, SiFramer, SiGithub, SiGodotengine, SiHtml5, SiJavascript, SiLaravel, SiMysql, SiPinboard, SiPostgresql, SiReact, SiSupabase, SiTailwindcss, SiThreedotjs, SiTypescript } from "react-icons/si";
-import { filter } from "mathjs";
 import Link from "next/link";
+import { SiBootstrap, SiCss3, SiDaisyui, SiDart, SiFlutter, SiFramer, SiGithub, SiGodotengine, SiHtml5, SiJavascript, SiLaravel, SiMysql, SiPostgresql, SiReact, SiSupabase, SiTailwindcss, SiThreedotjs, SiTypescript } from "react-icons/si";
+import { ExternalLink } from "lucide-react";
+
+// Interface Definitions
+interface TechItem {
+    icon: React.ReactNode;
+    title: string;
+}
+
+interface Project {
+    judul: string;
+    deskripsi: string;
+    techStack: TechItem[];
+    src: string;
+    repo: string;
+    demo: string;
+}
+
+const projectsList: Project[] = [
+    {
+        judul: "DeyportoV2",
+        deskripsi: "Website Portofolio kedua yang interaktif dengan React.js dan Three.js.",
+        techStack: [
+            { icon: <SiReact className="text-blue-400" />, title: "React" },
+            { icon: <SiTypescript className="text-blue-600" />, title: "Typescript" },
+            { icon: <SiFramer className="text-pink-500" />, title: "Framer" },
+            { icon: <SiTailwindcss className="text-cyan-400" />, title: "Tailwind" }
+        ],
+        src: "/projects/portov2.png",
+        repo: "https://github.com/Deyand03/deyportov2",
+        demo: "#"
+    },
+    {
+        judul: "KenalBersih",
+        deskripsi: "Sistem Pengelolaan Sampah Desa Mendalo Indah dengan Dashboard & Chatbot.",
+        techStack: [
+            { icon: <SiLaravel className="text-red-500" />, title: "Laravel" },
+            { icon: <SiTailwindcss className="text-cyan-400" />, title: "Tailwind" },
+            { icon: <SiDaisyui className="text-emerald-400" />, title: "DaisyUI" },
+            { icon: <SiMysql className="text-blue-500" />, title: "MySQL" }
+        ],
+        src: "/projects/kenalbersih.png",
+        repo: "https://github.com/Deyand03/kenalbersih",
+        demo: "https://kenalbersih.vercel.app/"
+    },
+    {
+        judul: "Interngate Mobile",
+        deskripsi: "Mobile App pendaftaran magang dengan fitur real-time chat via Supabase.",
+        techStack: [
+            { icon: <SiFlutter className="text-blue-400" />, title: "Flutter" },
+            { icon: <SiDart className="text-blue-500" />, title: "Dart" },
+            { icon: <SiSupabase className="text-green-400" />, title: "Supabase" }
+        ],
+        src: "/projects/interngatemobile.jpg",
+        repo: "https://github.com/Deyand03/singularity",
+        demo: "#"
+    },
+    {
+        judul: "Interngate",
+        deskripsi: "Platform pendaftaran magang mahasiswa dengan Dashboard Mitra yang komprehensif.",
+        techStack: [
+            { icon: <SiLaravel className="text-red-500" />, title: "Laravel" },
+            { icon: <SiTailwindcss className="text-cyan-400" />, title: "Tailwind" }
+        ],
+        src: "/projects/interngate.png",
+        repo: "https://github.com/Deyand03/interngate",
+        demo: "https://interngate.vercel.app"
+    },
+    {
+        judul: "Si-Klinik",
+        deskripsi: "Sistem reservasi klinik online dengan arsitektur Backend as a Service.",
+        techStack: [
+            { icon: <SiLaravel className="text-red-500" />, title: "Laravel" },
+            { icon: <SiJavascript className="text-yellow-400" />, title: "JS" },
+            { icon: <SiTailwindcss className="text-cyan-400" />, title: "Tailwind" }
+        ],
+        src: "/projects/siklinik.png",
+        repo: "https://github.com/Deyand03/klinik-r1",
+        demo: "https://klinikr1.vercel.app/"
+    },
+    {
+        judul: "Deyporto V1",
+        deskripsi: "Jejak awal belajar web development menggunakan HTML, CSS, dan Bootstrap.",
+        techStack: [
+            { icon: <SiHtml5 className="text-orange-500" />, title: "HTML" },
+            { icon: <SiCss3 className="text-blue-500" />, title: "CSS" },
+            { icon: <SiBootstrap className="text-purple-600" />, title: "Bootstrap" }
+        ],
+        src: "/projects/portov1.png",
+        repo: "https://github.com/Deyand03/deyporto",
+        demo: "https://deyporto.vercel.app"
+    },
+    {
+        judul: "Witchy",
+        deskripsi: "Eksperimen Game 2D Platformer menggunakan Godot Engine.",
+        techStack: [
+            { icon: <SiGodotengine className="text-blue-400" />, title: "Godot" }
+        ],
+        src: "/img/placeholder.jpg",
+        repo: "#",
+        demo: "#"
+    }
+];
 
 const Projects = () => {
     const projectsRef = useRef<HTMLDivElement>(null);
@@ -16,203 +117,108 @@ const Projects = () => {
 
     const scale = useTransform(scrollYProgress, [0, 1], [1, 0.85]);
     const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-    const blur = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(4px)"]);
-
-    interface Projects {
-        judul: string,
-        deskripsi: string,
-        techStack: React.ReactNode[],
-        src: string,
-        repo?: string,
-        demo?: string;
-    };
-    const projectsList: Projects[] = [
-        {
-            judul: "DeyportoV2",
-            deskripsi: "Website Portofolio kedua yang saya buat dengan tampilan dan animasi interaktif menggunakan React.js dan beberapa library",
-            techStack: [<SiReact className="text-blue-400" size={23} />, <SiTypescript size={23} className="text-blue-500" />, <SiFramer size={23} />, <SiThreedotjs size={23} />, <SiTailwindcss size={23} className="text-blue-500 dark:text-blue-400" />,],
-            src: "/projects/portov2.png",
-            repo: "https://github.com/Deyand03/deyportov2",
-            demo: "#"
-        },
-        {
-            judul: "KenalBersih",
-            deskripsi: "Website Pengelolaan Sampah Desa Mendalo Indah yang dilengkapi dengan Dashboard Volume Sampah, Data Warga, Dll. Dan juga dilengkapi dengan chatbot",
-            techStack: [<SiLaravel size={23} className="text-red-500" />, <SiJavascript size={23} className="text-yellow-400 dark:text-yellow-300" />, <SiTailwindcss size={23} className="text-blue-500 dark:text-blue-400" />, <SiDaisyui size={23} className="text" />, <SiMysql size={23} className="text" />],
-            src: "/projects/kenalbersih.png",
-            repo: "https://github.com/Deyand03/kenalbersih",
-            demo: "https://kenalbersih.vercel.app/"
-
-        },
-        {
-            judul: "Interngate Mobile",
-            deskripsi: "Versi Mobile App dari website interngate, menambahkan fitur chat dan menggunakan database yang berbeda (Supabase)",
-            techStack: [<SiFlutter size={23} className="text" />, <SiDart size={23} className="text" />, <SiSupabase size={23} className="text" />, <SiPostgresql size={23} className="text" />],
-            src: "/projects/interngatemobile.jpg",
-            repo: "https://github.com/Deyand03/singularity",
-            demo: "#"
-
-        },
-        {
-            judul: "Interngate",
-            deskripsi: "Website pendaftaran magang untuk mahasiswa dengan fitur yang terstruktur dan mudah digunakan, dilengkapi juga dengan Dashboard Mitra untuk memantau mahasiswa yang mendaftar",
-            techStack: [<SiLaravel size={23} className="text" />, <SiTailwindcss size={23} className="text-blue-500 dark:text-blue-400" />, <SiDaisyui size={23} className="text" />, <SiMysql size={23} className="text" />],
-            src: "/projects/interngate.png",
-            repo: "https://github.com/Deyand03/interngate",
-            demo: "https://interngate.vercel.app"
-
-        },
-        {
-            judul: "Si-Klinik",
-            deskripsi: "Website Klinik untuk reservasi online dengan model Backend as a Service",
-            techStack: [<SiLaravel size={23} className="text" />, <SiJavascript size={23} className="text" />, <SiTailwindcss size={23} className="text-blue-500 dark:text-blue-400" />, <SiDaisyui size={23} className="text" />, <SiMysql size={23} className="text" />],
-            src: "/projects/siklinik.png",
-            repo: "https://github.com/Deyand03/klinik-r1",
-            demo: "https://klinikr1.vercel.app/"
-
-        },
-        {
-            judul: "Deyporto",
-            deskripsi: "Website Portofolio pertama saya setelah belajar HTML, CSS dan Bootstrap",
-            techStack: [<SiHtml5 size={23} className="text" />, <SiCss3 size={23} className="text" />, <SiBootstrap size={23} className="text" />, <SiJavascript size={23} className="text" />,],
-            src: "/projects/portov1.png",
-            repo: "https://github.com/Deyand03/deyporto",
-            demo: "https://deyporto.vercel.app"
-        },
-        {
-            judul: "Witchy",
-            deskripsi: "Project Game 2D yang sedang saya coba buat menggunakan Godot Engine",
-            techStack: [<SiGodotengine size={23} className="text" />],
-            src: "#",
-            repo: "#",
-            demo: "#"
-        },
-    ];
-
-    const imageHover = {
-        noHover: { scale: 1, filter: "blur(0px)" },
-        hover: { scale: 1.05, filter: "blur(3px)" }
-    }
-    const imageOverlay = {
-        noHover: { opacity: 0, },
-        hover: { opacity: 1, transition: { duration: 0.3 } }
-    }
-    const logoOverlay = {
-        noHover: { opacity: 0, scale: 0 },
-        hover: { opacity: 1, scale: 1, transition: { duration: 0.1, delay: 0.1 } }
-    }
+    const blur = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(5px)"]);
 
     return (
-        <section ref={projectsRef} className="container mx-auto pb-40 px-4 md:px-20">
-            <motion.div
-                style={{ scale, opacity, filter: blur }}
-            >
-                {/* Header */}
-                <div className="flex justify-between items-center border-b-2 pb-2">
-                    <div className="flex flex-col gap-1">
-                        <h1 className="text-4xl md:text-7xl font-bold bg-linear-to-b from-black to-gray-300/80 bg-clip-text text-transparent dark:from-white dark:to-slate-900/10 tracking-tight">PROJECTS.</h1>
-                        <span className="text-muted-foreground uppercase text-lg">
-                            / things that I make
+        <section ref={projectsRef} className="w-full min-h-screen bg-background py-20 relative">
+            <motion.div style={{ scale, opacity, filter: blur }} className="px-4 md:px-20">
+
+                {/* Header Section */}
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 border-b border-black/10 dark:border-white/10 pb-6">
+                    <div>
+                        <h1 className="text-4xl md:text-7xl font-bold bg-linear-to-b from-black to-gray-300/80 bg-clip-text text-transparent dark:from-white dark:to-slate-900/10 tracking-tight">
+                            PROJECTS.
+                        </h1>
+                        <span className="text-sm md:text-base text-muted-foreground tracking-widest uppercase">
+                            / Things that i make
                         </span>
                     </div>
                 </div>
-                {/* Content */}
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-2">
-                    {/* List Projects */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 p-2 mt-12 col-span-1 md:col-span-7 border rounded-xl md:max-h-150 overflow-y-auto ">
-                        {projectsList.map((project, index) => (
-                            <motion.div
-                                key={index}
-                                className="md:h-85"
-                            >
-                                <div className="flex flex-col justify-between border rounded-2xl h-full shadow hover:shadow-md dark:shadow-white/40 transition-all duration-300">
-                                    <motion.div
-                                        initial="noHover"
-                                        whileHover="hover"
-                                    >
-                                        <div className="relative overflow-hidden m-2 border-2 rounded-2xl shadow">
-                                            <motion.img
-                                                src={project.src} alt={`project ${index}`} width={600} height={400} className="aspect-video"
-                                                variants={imageHover} />
-                                            <motion.div variants={imageOverlay} className="absolute inset-0 bg-black/40 h-full flex gap-2 items-center justify-center">
-                                                <motion.a variants={logoOverlay} href={project.repo} className="p-2"><SiGithub color="white" size={28} /></motion.a>
-                                                <motion.a variants={logoOverlay} href={project.demo} className="p-2"><FaShare color="white" size={28} /></motion.a>
-                                            </motion.div>
-                                        </div>
-                                        <div className="flex flex-col justify-between gap-2 p-2">
-                                            <div className="flex flex-col gap-1">
-                                                <h1 className="text-orange-300 dark:text-blue-400 font-semibold">{project.judul}</h1>
-                                                <p className="text-muted-foreground tracking-tight text-sm line-clamp-4 text-justify">{project.deskripsi}</p>
-                                            </div>
-                                        </div>
-                                    </motion.div>
-                                    <div className="flex gap-2 p-2 overflow-x-auto">
-                                        {project.techStack.map((icon, id) => (
-                                            <div key={id} className="p-2 bg-foreground/5 rounded-full">
-                                                {icon}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                    {/* Card Swap */}
-                    <div className="col-span-1 md:col-span-5 h-full">
-                        <div className="relative h-80 md:h-120">
-                            <div className="flex gap-2 items-center justify-center md:pt-16 uppercase font-bold tracking-tight text-3xl">
-                                <SiPinboard />
-                                Featured.
-                            </div>
-                            <CardSwap
-                                cardDistance={40}
-                                verticalDistance={60}
-                                delay={5000}
-                                pauseOnHover={true}
-                            >
-                                <Card>
-                                    <h3 className="flex items-center gap-2 text-foreground border-b border-foreground p-2">
-                                        <FaCode />
-                                        <span className="font-semibold tracking-tight">Deyporto</span>
-                                    </h3>
-                                    <Image
-                                        src={"/projects/portov2.png"}
-                                        alt="Portofolio V2"
-                                        fill
-                                        className="object-contain"
-                                    />
-                                </Card>
-                                <Card>
-                                    <h3 className="flex items-center gap-2 text-foreground border-b border-foreground p-2">
-                                        <FaCode />
-                                        <span className="font-semibold tracking-tight">KenalBersih</span>
-                                    </h3>
-                                    <Image
-                                        src={"/projects/kenalbersih.png"}
-                                        alt="kenalbersih"
-                                        fill
-                                        className="object-contain"
-                                    />
-                                </Card>
-                                <Card>
-                                    <h3 className="flex items-center gap-2 text-foreground border-b border-foreground p-2">
-                                        <FaCode />
-                                        <span className="font-semibold tracking-tight">Interngate</span>
-                                    </h3>
-                                    <Image
-                                        src={"/projects/interngate.png"}
-                                        alt="Interngate"
-                                        fill
-                                        className="object-contain"
-                                    />
-                                </Card>
-                            </CardSwap>
-                        </div>
-                    </div>
+                {/* Grid Layout */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {projectsList.map((project, index) => (
+                        <ProjectCard key={index} project={project} index={index} />
+                    ))}
                 </div>
             </motion.div>
         </section>
-    )
-}
+    );
+};
+
+const LazyLoading = () => (
+    <div className="w-full h-full flex justify-center items-center">
+        <span className="text-lg font-bold text-muted-foreground">Loading...</span>
+    </div>
+)
+
+const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="group relative h-100 w-full rounded-2xl overflow-hidden bg-gray-100 dark:bg-zinc-900 border border-black/5 dark:border-white/5 shadow-sm hover:shadow-xl transition-all duration-500"
+        >
+            {/* Background Image Layer */}
+            <div className="absolute inset-0 w-full h-full">
+                <Suspense fallback={<LazyLoading />}>
+                    <Image
+                        src={project.src}
+                        alt={project.judul}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110 group-hover:blur-[2px]"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                </Suspense>
+                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
+            </div>
+
+            {/* Content Layer */}
+            <div className="absolute inset-0 p-6 flex flex-col justify-end text-white z-20">
+                <div className="flex flex-wrap gap-2 mb-3 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-100">
+                    {project.techStack.map((tech, idx) => (
+                        <div
+                            key={idx}
+                            className="flex items-center gap-1 text-[10px] uppercase tracking-wider font-semibold bg-white/20 backdrop-blur-md px-2 py-1 rounded-full border border-white/10"
+                            title={tech.title}
+                        >
+                            {tech.icon}
+                            <span>{tech.title}</span>
+                        </div>
+                    ))}
+                </div>
+                <div className="transform translate-y-12 group-hover:translate-y-0 transition-transform duration-500 ease-in-out">
+                    <h3 className="text-2xl font-bold mb-2 leading-tight group-hover:text-yellow-500 dark:group-hover:text-blue-300 transition-colors">
+                        {project.judul}
+                    </h3>
+                    <p className="text-sm text-gray-300 line-clamp-2 group-hover:line-clamp-none transition-all duration-500">
+                        {project.deskripsi}
+                    </p>
+                </div>
+                <div className="flex gap-4 mt-6 transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                    {project.repo && (
+                        <Link
+                            href={project.repo}
+                            target="_blank"
+                            className="flex-1 flex items-center justify-center gap-2 bg-white text-black py-2 rounded-lg font-medium text-sm hover:bg-gray-200 transition-colors"
+                        >
+                            <SiGithub /> Code
+                        </Link>
+                    )}
+                    {project.demo && project.demo !== "#" && (
+                        <Link
+                            href={project.demo}
+                            target="_blank"
+                            className="flex-1 flex items-center justify-center gap-2 bg-white/20 backdrop-blur-md border border-white/20 text-white py-2 rounded-lg font-medium text-sm hover:bg-white/30 transition-colors"
+                        >
+                            <ExternalLink size={16} /> Demo
+                        </Link>
+                    )}
+                </div>
+            </div>
+        </motion.div>
+    );
+};
 
 export default Projects;

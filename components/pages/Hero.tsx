@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "motion/react";
-import { Download, CalendarDays, MapPin, GithubIcon, Github } from "lucide-react";
+import { Download, CalendarDays, MapPin } from "lucide-react";
 import BlurText from "../BlurText";
 import LightRays from "../LightRays";
 import TextType from "../TextType";
@@ -17,7 +17,7 @@ import { Shine } from "../animate-ui/primitives/effects/shine";
 import Link from "next/link";
 import { useRef } from "react";
 import { OrbitingCircles } from "../ui/orbiting-circles";
-import { SiCss3, SiFramer, SiGithub, SiGodotengine, SiHtml5, SiJavascript, SiMysql, SiPhp, SiPostgresql, SiReact, SiSupabase, SiTailwindcss, SiTypescript } from "react-icons/si";
+import { SiCss3, SiFramer, SiGodotengine, SiHtml5, SiJavascript, SiMysql, SiPhp, SiPostgresql, SiReact, SiSupabase, SiTailwindcss, SiTypescript } from "react-icons/si";
 
 
 const Hero = () => {
@@ -132,7 +132,7 @@ const Hero = () => {
     ];
 
     return (
-        <section ref={heroRef} className="relative w-full h-screen overflow-hidden px-0 md:px-15">
+        <section ref={heroRef} className="w-full h-screen overflow-hidden px-0 md:px-16">
             <motion.div
                 style={{ scale, opacity, filter: blur }}
                 className="w-full h-full relative"
@@ -256,7 +256,7 @@ const Hero = () => {
                             <SiMysql size={20} />
                             <SiHtml5 size={20} />
                             <SiPhp size={20} />
-                            <SiGithub size={20} />
+                            <FaGithub size={20} />
                         </OrbitingCircles>
                     </div>
                 </div>
