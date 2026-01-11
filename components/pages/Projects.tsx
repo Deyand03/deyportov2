@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
-import CardSwap, { Card } from "./CardSwap";
+import CardSwap, { Card } from "../CardSwap";
 import Image from "next/image";
 import { FaCode, FaShare, FaVideoSlash } from "react-icons/fa";
 import { SiBootstrap, SiCss3, SiDaisyui, SiDart, SiFlutter, SiFramer, SiGithub, SiGodotengine, SiHtml5, SiJavascript, SiLaravel, SiMysql, SiPinboard, SiPostgresql, SiReact, SiSupabase, SiTailwindcss, SiThreedotjs, SiTypescript } from "react-icons/si";
@@ -16,6 +16,7 @@ const Projects = () => {
 
     const scale = useTransform(scrollYProgress, [0, 1], [1, 0.85]);
     const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+    const blur = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(4px)"]);
 
     interface Projects {
         judul: string,
@@ -102,14 +103,14 @@ const Projects = () => {
     }
 
     return (
-        <section ref={projectsRef} className="container mx-auto pt-20 pb-40 px-4 md:px-20">
+        <section ref={projectsRef} className="container mx-auto pb-40 px-4 md:px-20">
             <motion.div
-                style={{ scale, opacity }}
+                style={{ scale, opacity, filter: blur }}
             >
                 {/* Header */}
                 <div className="flex justify-between items-center border-b-2 pb-2">
                     <div className="flex flex-col gap-1">
-                        <h1 className="text-4xl md:text-7xl tracking-tighter font-bold text-foreground">PROJECTS.</h1>
+                        <h1 className="text-4xl md:text-7xl font-bold bg-linear-to-b from-black to-gray-300/80 bg-clip-text text-transparent dark:from-white dark:to-slate-900/10 tracking-tight">PROJECTS.</h1>
                         <span className="text-muted-foreground uppercase text-lg">
                             / things that I make
                         </span>

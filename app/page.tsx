@@ -1,12 +1,13 @@
 "use client";
 import dynamic from "next/dynamic";
-const About = dynamic(() => import("@/components/About"));
-const Projects = dynamic(() => import("@/components/Projects"));
-const Contact = dynamic(() => import("@/components/Contact"));
+const About = dynamic(() => import("@/components/pages/About"));
+const Projects = dynamic(() => import("@/components/pages/Projects"));
+const Contact = dynamic(() => import("@/components/pages/Contact"));
 import ClickSpark from "@/components/ClickSpark";
-import Hero from "@/components/Hero";
+import Hero from "@/components/pages/Hero";
 import useSound from "use-sound";
-import { domAnimation, LazyMotion } from "motion/react";
+import { ScrollProgress, ScrollProgressProvider } from "@/components/animate-ui/primitives/animate/scroll-progress";
+import GradualBlurMemo from "@/components/GradualBlur";
 
 const Home = () => {
   const [play] = useSound('/sounds/switch.mp3')
@@ -19,12 +20,23 @@ const Home = () => {
         sparkCount={8}
         duration={400}
       >
-        <LazyMotion features={domAnimation}>
-          <Hero />
-          <About />
-          <Projects />
-          <Contact />
-        </LazyMotion>
+        <Hero />
+        <About />
+        <Projects />
+        <Contact />
+        <ScrollProgressProvider global>
+          <ScrollProgress className="fixed top-0 left-0 bg-yellow-500/90 dark:bg-white h-1" />
+        </ScrollProgressProvider>
+        <GradualBlurMemo
+          target="page"
+          position="bottom"
+          height="6rem"
+          strength={2}
+          divCount={5}
+          curve="bezier"
+          exponential={true}
+          opacity={1}
+        />
       </ClickSpark>
     </main>
   )

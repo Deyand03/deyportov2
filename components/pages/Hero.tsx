@@ -1,10 +1,10 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "motion/react";
-import { Download, MousePointerClick, CalendarDays, MapPin } from "lucide-react";
-import BlurText from "./BlurText";
-import LightRays from "./LightRays";
-import TextType from "./TextType";
+import { Download, CalendarDays, MapPin, GithubIcon, Github } from "lucide-react";
+import BlurText from "../BlurText";
+import LightRays from "../LightRays";
+import TextType from "../TextType";
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import Image from "next/image";
 import {
@@ -13,12 +13,11 @@ import {
     HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Shine } from "./animate-ui/primitives/effects/shine";
+import { Shine } from "../animate-ui/primitives/effects/shine";
 import Link from "next/link";
 import { useRef } from "react";
-import dynamic from "next/dynamic";
-import useIsMobile from "@/hooks/use-is-mobile";
-const Lanyard = dynamic(() => import('./Lanyard'));
+import { OrbitingCircles } from "../ui/orbiting-circles";
+import { SiCss3, SiFramer, SiGithub, SiGodotengine, SiHtml5, SiJavascript, SiMysql, SiPhp, SiPostgresql, SiReact, SiSupabase, SiTailwindcss, SiTypescript } from "react-icons/si";
 
 
 const Hero = () => {
@@ -27,7 +26,6 @@ const Hero = () => {
         target: heroRef,
         offset: ["end end", "end start"]
     });
-    const isMobile = useIsMobile();
 
     const scale = useTransform(scrollY, [0, 500], [1, 0.8]);
     const opacity = useTransform(scrollY, [0, 500], [1, 0]);
@@ -134,7 +132,7 @@ const Hero = () => {
     ];
 
     return (
-        <section ref={heroRef} className="relative w-full h-screen overflow-hidden">
+        <section ref={heroRef} className="relative w-full h-screen overflow-hidden px-0 md:px-15">
             <motion.div
                 style={{ scale, opacity, filter: blur }}
                 className="w-full h-full relative"
@@ -154,7 +152,7 @@ const Hero = () => {
                     />
                 </div>
 
-                <div className="relative z-10 container mx-auto px-6 h-full flex flex-col-reverse md:flex-row items-center justify-center md:justify-between gap-8 md:gap-0">
+                <div className="relative z-10 container mx-auto px-6 h-full flex flex-col-reverse md:flex-row items-center justify-center md:justify-between gap-8">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -168,7 +166,7 @@ const Hero = () => {
                         />
 
                         <div className="space-y-2">
-                            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-foreground leading-tight">
+                            <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold tracking-tight text-foreground leading-tight">
                                 <BlurText
                                     text="Hello, I'm"
                                     className="dark:text-white text-black flex justify-center md:justify-start"
@@ -240,26 +238,27 @@ const Hero = () => {
                             </Shine>
                         </motion.div>
                     </motion.div>
-                    {!isMobile && <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="w-full md:w-1/2 h-[40vh] md:h-full flex flex-col items-center justify-center relative"
-                    >
-                        <div className="w-full h-full flex items-center justify-center cursor-grab active:cursor-grabbing relative z-20">
-                            <Lanyard />
-                        </div>
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 1.5, duration: 1 }}
-                            className="absolute bottom-10 md:bottom-20 flex items-center gap-2 text-xs text-muted-foreground pointer-events-none"
-                        >
-                            <MousePointerClick className="w-4 h-4" />
-                            <span>Drag the card!</span>
-                        </motion.div>
-                    </motion.div>
-                    }
+                    <div className="relative flex h-full md:h-125 w-full md:w-1/2 flex-col items-center justify-center overflow-hidden">
+                        <OrbitingCircles>
+                            <SiReact size={100}/>
+                            <SiTypescript size={100} />
+                            <SiFramer size={100} />
+                            <SiGodotengine size={100} />
+                            <SiJavascript size={100} />
+                        </OrbitingCircles>
+                        <OrbitingCircles radius={100} reverse>
+                            <SiSupabase size={30} />
+                            <SiPostgresql size={30} />
+                            <SiTailwindcss size={30} />
+                            <SiCss3 size={30} />
+                        </OrbitingCircles>
+                        <OrbitingCircles radius={50}>
+                            <SiMysql size={20} />
+                            <SiHtml5 size={20} />
+                            <SiPhp size={20} />
+                            <SiGithub size={20} />
+                        </OrbitingCircles>
+                    </div>
                 </div>
 
                 <motion.div
