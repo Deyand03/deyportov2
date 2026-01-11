@@ -4,9 +4,11 @@ import { FaPaintBrush, FaTools } from "react-icons/fa";
 import { SiBun, SiFramer, SiGit, SiGithub, SiGodotengine, SiHtml5, SiJavascript, SiLaravel, SiMediapipe, SiMysql, SiNpm, SiPhp, SiPnpm, SiPostgresql, SiPython, SiReact, SiSupabase, SiTailwindcss, SiTypescript, SiVercel } from "react-icons/si";
 import { useRef } from "react";
 import { Meteors } from "../ui/meteors";
-import { IoPerson } from "react-icons/io5";
+import { IoPerson, IoTime } from "react-icons/io5";
 import { Marquee } from "../ui/marquee";
 import Masonry from "../Masonry";
+import { Timeline } from "../ui/timeline";
+import Image from "next/image";
 
 const About = () => {
 
@@ -146,6 +148,67 @@ const About = () => {
         )
     }
 
+    const timeline = [
+        {
+            title: "2026",
+            content: (
+                <div>
+                    <section className="text-muted-foreground space-y-4">
+                        <p>
+                            Kicked off the year by mastering React.js and Next.js, applying these modern
+                            technologies to build the portfolio you are looking at right now.
+                        </p>
+                        <p>
+                            Moving forward, my focus shifts to expanding my horizons: developing an immersive 2D Platformer game
+                            and engineering a personal AI Automation Agent to streamline my workflow.
+                        </p>
+                    </section>
+                    <div className="grid grid-cols-2 gap-4">
+                        <Image src={"/projects/portov2.png"} alt="Deyporto V2" width={600} height={400} className="border rounded-xl mt-4" />
+                    </div>
+                </div>
+
+            )
+        },
+        {
+            title: "2025",
+            content: (
+                <section className="text-muted-foreground space-y-4">
+                    <p>
+                        A defined year of technical exploration. I started with the basics—HTML, CSS,
+                        and Bootstrap—before advancing to Laravel to build 'InternGate' during my 4th semester.
+                    </p>
+                    <p>
+                        By Semester 5, I accelerated my productivity, delivering three major projects:
+                        'KenalBersih', 'SI-Klinik', and the mobile iteration of 'InternGate'.
+                    </p>
+                    <div className="grid grid-cols-2 gap-4 mt-4">
+                        <Image src={"/projects/siklinik.png"} alt="Si-Klinik" width={600} height={400} className="border rounded-xl" />
+                        <Image src={"/projects/kenalbersih.png"} alt="KenalBersih" width={600} height={400} className="border rounded-xl" />
+                        <Image src={"/projects/interngatemobile.jpg"} alt="InterngateMobile" width={600} height={400} className="border rounded-xl" />
+                        <Image src={"/projects/interngate.png"} alt="Interngate" width={600} height={400} className="border rounded-xl" />
+                        <Image src={"/projects/portov1.png"} alt="Deyporto V1" width={600} height={400} className="border rounded-xl col-span-2" />
+                    </div>
+                </section>
+            )
+        },
+        {
+            title: "2023",
+            content: (
+                <section className="text-muted-foreground">
+                    <p>
+                        Enrolled in the Information Systems program at Universitas Jambi.
+                        This marked the start of my academic journey, laying the theoretical and logical foundation for my career in technology.
+                    </p>
+                    <div className="relative mt-4">
+                        <Image src={"/unja.jpg"} alt="Universitas Jambi" width={600} height={400} className="border rounded-xl" />
+                        <div className="absolute inset-0 bg-black/20"></div>
+                    </div>
+                </section>
+            )
+        }
+    ]
+
     return (
         <section ref={aboutRef} className="min-h-screen w-full bg-background relative overflow-hidden py-20">
             <motion.div
@@ -249,9 +312,22 @@ const About = () => {
                             <div className="absolute pointer-events-none inset-y-0 left-0 from-background bg-linear-to-r w-1/4"></div>
                             <div className="absolute pointer-events-none inset-y-0 right-0 from-background bg-linear-to-l w-1/4"></div>
                         </div>
-
+                        {/* Journey */}
+                        <div className="order-3 col-span-2 flex flex-col pt-5">
+                            {/* Header */}
+                            <figure className="flex items-center gap-3 py-2">
+                                <div className="shadow-md shadow-orange-500/30 dark:shadow-white/30 rounded-xl p-3">
+                                    <IoTime />
+                                </div>
+                                <figcaption className="text-xl font-semibold uppercase">My Journey</figcaption>
+                            </figure>
+                            {/* Timeline */}
+                            <div className="relative w-full overflow-clip">
+                                <Timeline data={timeline} />
+                            </div>
+                        </div>
                         {/* Art Gallery */}
-                        <div className="col-span-2 w-full relative min-h-[150vh] flex flex-col gap-4 order-3 mt-4">
+                        <div className="col-span-2 w-full relative flex flex-col gap-4 order-4 mt-4">
                             <div>
                                 <figure className="flex items-center gap-3">
                                     <div className="p-3 rounded-xl shadow-md shadow-orange-500/30 dark:shadow-white/30">

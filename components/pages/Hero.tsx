@@ -27,9 +27,9 @@ const Hero = () => {
         offset: ["end end", "end start"]
     });
 
-    const scale = useTransform(scrollY, [0, 500], [1, 0.8]);
-    const opacity = useTransform(scrollY, [0, 500], [1, 0]);
-    const blur = useTransform(scrollY, [0, 100], ["blur(0px)", "blur(4px)"]);
+    const scale = useTransform(scrollY, [0, 1000], [1, 0.8]);
+    const opacity = useTransform(scrollY, [0, 1000], [1, 0]);
+    const blur = useTransform(scrollY, [0, 1000], ["blur(0px)", "blur(4px)"]);
 
     const socialLinks = [
         {

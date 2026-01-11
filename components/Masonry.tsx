@@ -94,7 +94,7 @@ const Masonry: React.FC<MasonryProps> = ({
   const columns = useMedia(
     ['(min-width:1500px)', '(min-width:1000px)', '(min-width:600px)', '(min-width:400px)'],
     [5, 4, 3, 2],
-    1
+    2
   );
 
   const [containerRef, { width }] = useMeasure<HTMLDivElement>();
@@ -150,6 +150,13 @@ const Masonry: React.FC<MasonryProps> = ({
       return { ...child, x, y, w: columnWidth, h: height };
     });
   }, [columns, items, width]);
+
+  const containerHeight = useMemo(() => {
+    if (grid.length === 0) return 0;
+    const maxHeight = Math.max(...grid.map(item => item.y + item.h));
+    
+    return maxHeight + 20; 
+  }, [grid]);
 
   const hasMounted = useRef(false);
 
@@ -223,7 +230,7 @@ const Masonry: React.FC<MasonryProps> = ({
   };
 
   return (
-    <div ref={containerRef} className="relative w-full h-fit">
+    <div ref={containerRef} className="relative w-full" style={{height: containerHeight > 0 ? containerHeight : 'auto'}}>
       {grid.map(item => (
         <div
           key={item.id}
@@ -234,11 +241,11 @@ const Masonry: React.FC<MasonryProps> = ({
           onMouseLeave={e => handleMouseLeave(item.id, e.currentTarget)}
         >
           <div
-            className="relative w-full h-full bg-cover bg-center rounded-[10px] shadow-[0px_10px_50px_-10px_rgba(0,0,0,0.2)] uppercase text-[10px] leading-[10px]"
+            className="relative w-full h-full bg-cover bg-center rounded-[10px] shadow-[0px_10px_50px_-10px_rgba(0,0,0,0.2)] uppercase text-[10px] leading-2.5"
             style={{ backgroundImage: `url(${item.img})` }}
           >
             {colorShiftOnHover && (
-              <div className="color-overlay absolute inset-0 rounded-[10px] bg-gradient-to-tr from-pink-500/50 to-sky-500/50 opacity-0 pointer-events-none" />
+              <div className="color-overlay absolute inset-0 rounded-[10px] bg-linear-to-tr from-pink-500/50 to-sky-500/50 opacity-0 pointer-events-none" />
             )}
           </div>
         </div>
