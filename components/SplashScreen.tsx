@@ -3,16 +3,14 @@
 import { motion, Transition } from "framer-motion";
 import { useEffect, useState } from "react";
 
-// Ini Cubic Bezier yang "Mahal".
-// Rasanya: Lambat di awal, cepet banget di tengah, lalu ngerem halus di akhir.
 const transitionAnim: Transition = {
     duration: 1.2,
-    ease: [0.83, 0, 0.17, 1] as any // <-- Ini si Cubic Bezier sakti
+    ease: [0.83, 0, 0.17, 1] as any
 };
 
 interface SplashScreenProps {
-    children: React.ReactNode; // Halaman website kamu
-    splashContent: React.ReactNode; // Konten desain splash screen kamu
+    children: React.ReactNode; 
+    splashContent: React.ReactNode;
 }
 
 export default function SplashScreenProvider({ children, splashContent }: SplashScreenProps) {
