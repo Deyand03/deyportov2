@@ -1,6 +1,8 @@
+"use client";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { ProjectCard, projectsList } from "../subcomponent/SubProjects";
+import useSound from "use-sound";
 
 const Projects = () => {
     const projectsRef = useRef<HTMLDivElement>(null);
@@ -8,13 +10,13 @@ const Projects = () => {
         target: projectsRef,
         offset: ['end end', 'end start']
     });
-
+    const [play] = useSound('/sounds/switch.mp3')
     const scale = useTransform(scrollYProgress, [0, 1], [1, 0.85]);
     const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
     const blur = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(5px)"]);
 
     return (
-        <section ref={projectsRef} className="w-full min-h-screen bg-background py-20 relative">
+        <section ref={projectsRef} className="w-full min-h-screen bg-background py-20 relative" onClick={() => play()}>
             <motion.div style={{ scale, opacity, filter: blur }} className="px-4 md:px-20">
 
                 {/* Header Section */}

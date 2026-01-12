@@ -1,3 +1,4 @@
+"use client";
 import { motion, useScroll, useTransform } from "motion/react";
 import { Download } from "lucide-react";
 import BlurText from "../BlurText";
@@ -14,6 +15,7 @@ import { Shine } from "../animate-ui/primitives/effects/shine";
 import { useRef } from "react";
 import { OrbitingCircles } from "../ui/orbiting-circles";
 import { SiCss3, SiFramer, SiGodotengine, SiHtml5, SiJavascript, SiMysql, SiPhp, SiPostgresql, SiReact, SiSupabase, SiTailwindcss, SiTypescript } from "react-icons/si";
+import useSound from "use-sound";
 
 const Hero = () => {
     const heroRef = useRef<HTMLDivElement>(null);
@@ -21,13 +23,14 @@ const Hero = () => {
         target: heroRef,
         offset: ["end end", "end start"]
     });
-
+    const [play] = useSound('/sounds/switch.mp3')
+    
     const scale = useTransform(scrollY, [0, 1000], [1, 0.8]);
     const opacity = useTransform(scrollY, [0, 1000], [1, 0]);
     const blur = useTransform(scrollY, [0, 1000], ["blur(0px)", "blur(4px)"]);
 
     return (
-        <section ref={heroRef} className="w-full h-screen overflow-hidden px-0 md:px-16">
+        <section ref={heroRef} className="w-full h-screen overflow-hidden px-0 md:px-16" onClick={() => play()}>
             <motion.div
                 style={{ scale, opacity, filter: blur }}
                 className="w-full h-full relative"

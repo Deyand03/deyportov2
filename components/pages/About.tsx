@@ -1,3 +1,4 @@
+"use client";
 import { motion, useScroll, useTransform } from "motion/react";
 import { FaPaintBrush, FaTools } from "react-icons/fa";
 import { useRef } from "react";
@@ -7,8 +8,10 @@ import { Marquee } from "../ui/marquee";
 import Masonry from "../Masonry";
 import { Timeline } from "../ui/timeline";
 import skillsLogo, { drawings, timeline, Badge3D } from "../subcomponent/SubAbout";
+import useSound from "use-sound";
 
 const About = () => {
+    const [play] = useSound('/sounds/switch.mp3')
     const aboutRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: aboutRef,
@@ -26,7 +29,7 @@ const About = () => {
     const col5 = skillsLogo.slice(0, skillsLogo.length / 4);
 
     return (
-        <section ref={aboutRef} className="min-h-screen w-full bg-background relative overflow-hidden py-20">
+        <section ref={aboutRef} className="min-h-screen w-full bg-background relative overflow-hidden py-20" onClick={() => play()}>
             <motion.div
                 style={{ scale, opacity, filter: blur }}
             >

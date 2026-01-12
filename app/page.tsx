@@ -1,18 +1,15 @@
-"use client";
 import dynamic from "next/dynamic";
 const About = dynamic(() => import("@/components/pages/About"));
 const Projects = dynamic(() => import("@/components/pages/Projects"));
 const Contact = dynamic(() => import("@/components/pages/Contact"));
 import ClickSpark from "@/components/ClickSpark";
 import Hero from "@/components/pages/Hero";
-import useSound from "use-sound";
 import { ScrollProgress, ScrollProgressProvider } from "@/components/animate-ui/primitives/animate/scroll-progress";
 import GradualBlurMemo from "@/components/GradualBlur";
 
 const Home = () => {
-  const [play] = useSound('/sounds/switch.mp3')
   return (
-    <main className="relative overflow-x-hidden" onClick={() => play()}>
+    <main className="relative overflow-x-hidden">
       <ClickSpark
         sparkColor='#fff'
         sparkSize={10}
