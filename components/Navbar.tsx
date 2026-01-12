@@ -13,6 +13,7 @@ import {
     X
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLenis } from "lenis/react";
 interface NavItem {
     name: string;
     href: string;
@@ -29,6 +30,22 @@ const navItems: NavItem[] = [
 export function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const lenis = useLenis();
+
+    const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        e.preventDefault();
+
+        const targetId = href.replace("#", "");
+        const elem = document.getElementById(targetId);
+
+        if (elem && lenis) {
+            lenis.scrollTo(elem, {
+                duration: 1.5,
+            });
+        }
+        setIsMobileMenuOpen(false);
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -55,7 +72,7 @@ export function Navbar() {
                 >
                     <div className="hidden md:flex items-center gap-1">
                         {navItems.map((item) => (
-                            <NavLink key={item.name} item={item} />
+                            <NavLink key={item.name} item={item} onClick={(e) => handleScrollTo(e, item.href)} />
                         ))}
                     </div>
                     <button
@@ -81,7 +98,7 @@ export function Navbar() {
                             <a
                                 key={item.name}
                                 href={item.href}
-                                onClick={() => setIsMobileMenuOpen(false)}
+                                onClick={(e) => handleScrollTo(e, item.href)}
                                 className="flex items-center gap-3 p-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
                             >
                                 <item.icon size={20} />
@@ -95,12 +112,13 @@ export function Navbar() {
     );
 }
 
-function NavLink({ item }: { item: NavItem }) {
+function NavLink({ item, onClick }: { item: NavItem, onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void }) {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
         <a
             href={item.href}
+            onClick={onClick}
             className="relative px-4 py-2 rounded-full text-sm font-medium text-gray-700 dark:text-gray-200 transition-colors hover:text-black dark:hover:text-white"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}

@@ -29,15 +29,15 @@ const About = () => {
     const col5 = skillsLogo.slice(0, skillsLogo.length / 4);
 
     return (
-        <section ref={aboutRef} className="min-h-screen w-full bg-background relative overflow-hidden py-20" onClick={() => play()}>
+        <section ref={aboutRef} className="min-h-screen w-full relative overflow-hidden py-20" onClick={() => play()} id="about">
             <motion.div
                 style={{ scale, opacity, filter: blur }}
             >
+                {/* Header Section   */}
                 <div className="px-4 md:px-20 pb-20">
-                    {/* Header Section */}
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 border-b border-black/10 dark:border-white/10 pb-6">
                         <div>
-                            <h1 className="text-4xl md:text-7xl font-bold bg-linear-to-b from-black to-gray-300/80 bg-clip-text text-transparent dark:from-white dark:to-slate-900/10 tracking-tight">
+                            <h1 className="text-4xl md:text-7xl font-bold text-foreground tracking-tight">
                                 ABOUT.
                             </h1>
                             <span className="text-sm md:text-base text-muted-foreground tracking-widest uppercase">
@@ -54,7 +54,7 @@ const About = () => {
                         </div>
                     </div>
                     {/* Content */}
-                    <div className="grid min-h-full grid-cols-1 md:grid-cols-2">
+                    <div className="grid min-h-full grid-cols-1 md:grid-cols-2 gap-2">
                         {/* Bio */}
                         <div className="order-2 md:order-1 border p-2 px-4 rounded-xl relative overflow-hidden bg-zinc-100 dark:bg-zinc-900">
                             <div className="flex items-center gap-3 mb-3">
@@ -84,7 +84,7 @@ const About = () => {
                         </div>
 
                         {/* 3D Marquee */}
-                        <div className="order-1 md:order-2 relative w-full min-h-96 overflow-hidden perspective-near">
+                        <div className="order-1 md:order-2 relative w-full min-h-96 overflow-hidden perspective-near border rounded-xl">
                             <div className="flex flex-col items-center" style={{ transform: "translateX(-100px) translateY(0px) translateZ(-100px) rotateX(20deg) rotateY(-10deg) rotateZ(20deg)" }}>
                                 <Marquee pauseOnHover className="relative -z-10 [--duration:20s]">
                                     {col1.map((e) => (

@@ -174,7 +174,6 @@ const timeline = [
                 </p>
                 <div className="relative mt-4">
                     <Image src={"/unja.jpg"} alt="Universitas Jambi" width={600} height={400} className="border rounded-xl" />
-                    <div className="absolute inset-0 bg-black/20"></div>
                 </div>
             </section>
         )

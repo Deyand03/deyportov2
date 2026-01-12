@@ -30,25 +30,12 @@ const Hero = () => {
     const blur = useTransform(scrollY, [0, 1000], ["blur(0px)", "blur(4px)"]);
 
     return (
-        <section ref={heroRef} className="w-full h-screen overflow-hidden px-0 md:px-16" onClick={() => play()}>
+        <section ref={heroRef} className="w-full h-screen overflow-hidden px-0 md:px-16" onClick={() => play()} id="hero">
             <motion.div
                 style={{ scale, opacity, filter: blur }}
                 className="w-full h-full relative"
             >
-                <div className="absolute inset-0 z-0 pointer-events-none">
-                    <LightRays
-                        raysOrigin="top-center"
-                        raysColor="#ffffff"
-                        raysSpeed={2}
-                        lightSpread={0.6}
-                        rayLength={0.8}
-                        followMouse={true}
-                        mouseInfluence={0.2}
-                        noiseAmount={0.05}
-                        distortion={0.1}
-                        className="opacity-20 dark:opacity-100"
-                    />
-                </div>
+                
 
                 <div className="relative z-10 container mx-auto px-6 h-full flex flex-col-reverse md:flex-row items-center justify-center md:justify-between gap-8">
                     <motion.div

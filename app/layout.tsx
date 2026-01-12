@@ -4,6 +4,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
 import SmoothScroll from "@/components/SmoothScroll";
+import SplashScreenProvider from "@/components/SplashScreen";
+import { DrawLineText } from "@/components/gsap/draw-line-text";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -32,10 +34,24 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          <SmoothScroll>
-            {children}
-          </SmoothScroll>
+          <SplashScreenProvider
+            splashContent={
+              <div className="flex flex-col items-center gap-4">
+                <DrawLineText
+                  className="font-medium"
+                  fontSize={60}
+                  strokeWidth={1.5}
+                  text="Deyporto"
+                  color="var(--color-foreground)"
+                />
+              </div>
+            }
+          >
+            <Navbar />
+            <SmoothScroll>
+              {children}
+            </SmoothScroll>
+          </SplashScreenProvider>
         </ThemeProvider>
       </body>
     </html>

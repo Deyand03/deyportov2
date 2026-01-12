@@ -16,13 +16,13 @@ const Projects = () => {
     const blur = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(5px)"]);
 
     return (
-        <section ref={projectsRef} className="w-full min-h-screen bg-background py-20 relative" onClick={() => play()}>
+        <section ref={projectsRef} className="w-full min-h-screen py-20 relative" onClick={() => play()} id="projects">
             <motion.div style={{ scale, opacity, filter: blur }} className="px-4 md:px-20">
 
                 {/* Header Section */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 border-b border-black/10 dark:border-white/10 pb-6">
                     <div>
-                        <h1 className="text-4xl md:text-7xl font-bold bg-linear-to-b from-black to-gray-300/80 bg-clip-text text-transparent dark:from-white dark:to-slate-900/10 tracking-tight">
+                        <h1 className="text-4xl md:text-7xl font-bold text-foreground tracking-tight">
                             PROJECTS.
                         </h1>
                         <span className="text-sm md:text-base text-muted-foreground tracking-widest uppercase">
