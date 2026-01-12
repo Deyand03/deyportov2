@@ -2,7 +2,6 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { Download } from "lucide-react";
 import BlurText from "../BlurText";
-import LightRays from "../LightRays";
 import TextType from "../TextType";
 import { FaGithub } from "react-icons/fa";
 import SocialLinks from "../subcomponent/SocialLinks";

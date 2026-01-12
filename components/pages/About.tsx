@@ -56,7 +56,7 @@ const About = () => {
                     {/* Content */}
                     <div className="grid min-h-full grid-cols-1 md:grid-cols-2 gap-2">
                         {/* Bio */}
-                        <div className="order-2 md:order-1 border p-2 px-4 rounded-xl relative overflow-hidden bg-zinc-100 dark:bg-zinc-900">
+                        <div className="order-2 col-span-2 md:col-span-1 md:order-1 border p-2 px-4 rounded-xl relative overflow-hidden bg-zinc-100 dark:bg-zinc-900">
                             <div className="flex items-center gap-3 mb-3">
                                 <div className="flex gap-2 items-center bg-gray-100 dark:bg-black/90 w-fit rounded-xl dark:shadow-white/30 shadow-orange-500/30 shadow-md border p-3">
                                     <IoPerson />
@@ -84,7 +84,7 @@ const About = () => {
                         </div>
 
                         {/* 3D Marquee */}
-                        <div className="order-1 md:order-2 relative w-full min-h-96 overflow-hidden perspective-near border rounded-xl">
+                        <div className="order-1 col-span-2 md:col-span-1 md:order-2 relative w-full min-h-96 overflow-hidden perspective-near border rounded-xl">
                             <div className="flex flex-col items-center" style={{ transform: "translateX(-100px) translateY(0px) translateZ(-100px) rotateX(20deg) rotateY(-10deg) rotateZ(20deg)" }}>
                                 <Marquee pauseOnHover className="relative -z-10 [--duration:20s]">
                                     {col1.map((e) => (
