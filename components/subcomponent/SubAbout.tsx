@@ -1,110 +1,7 @@
 import Image from "next/image";
-import { SiReact, SiLaravel, SiMysql, SiPostgresql, SiTypescript, SiPhp, SiJavascript, SiHtml5, SiTailwindcss, SiPython, SiMediapipe, SiFramer, SiGithub, SiGit, SiVercel, SiSupabase, SiGodotengine, SiNpm, SiPnpm, SiBun } from "react-icons/si";
 
-const drawings = [
-    {
-        id: "1",
-        img: "/drawing/drawRealism.jpg",
-        url: "#",
-        height: 700
-    },
-    {
-        id: "2",
-        img: "/drawing/drawShoko.jpg",
-        url: "#",
-        height: 500
-    },
-    {
-        id: "3",
-        img: "/drawing/drawNime2.jpg",
-        url: "#",
-        height: 750
-    },
-    {
-        id: "4",
-        img: "/drawing/drawNime.jpg",
-        url: "#",
-        height: 700
-    },
-    {
-        id: "5",
-        img: "/drawing/drawMedieval.jpg",
-        url: "#",
-        height: 550
-    },
-    {
-        id: "6",
-        img: "/drawing/draw2B.jpeg",
-        url: "#",
-        height: 450
-    },
-    {
-        id: "7",
-        img: "/drawing/drawItachi.jpeg",
-        url: "#",
-        height: 600
-    },
-    {
-        id: "8",
-        img: "/drawing/drawMakima.jpeg",
-        url: "#",
-        height: 550
-    },
-    {
-        id: "9",
-        img: "/drawing/drawNime3.jpeg",
-        url: "#",
-        height: 550
-    },
-    {
-        id: "10",
-        img: "/drawing/drawMakimaeye.jpeg",
-        url: "#",
-        height: 550
-    },
-    {
-        id: "11",
-        img: "/drawing/drawSemirealis.jpeg",
-        url: "#",
-        height: 550
-    },
-    {
-        id: "12",
-        img: "/drawing/drawSukuna.jpeg",
-        url: "#",
-        height: 550
-    },
-    {
-        id: "13",
-        img: "/drawing/drawViolet.jpeg",
-        url: "#",
-        height: 550
-    },
-]
 
-const skillsLogo = [
-    { icon: <SiReact />, title: "React" },
-    { icon: <SiLaravel />, title: "Laravel" },
-    { icon: <SiMysql />, title: "MySQL" },
-    { icon: <SiPostgresql />, title: "PostgreSQL" },
-    { icon: <SiTypescript />, title: "Typescript" },
-    { icon: <SiPhp />, title: "PHP" },
-    { icon: <SiJavascript />, title: "Javascript" },
-    { icon: <SiHtml5 />, title: "HTML" },
-    { icon: <SiTailwindcss />, title: "TailwindCSS" },
-    { icon: <SiPython />, title: "Python" },
-    { icon: <SiMediapipe />, title: "Mediapipe" },
-    { icon: <SiFramer />, title: "Framer Motion" },
-    { icon: <SiGithub />, title: "Github" },
-    { icon: <SiGit />, title: "Git" },
-    { icon: <SiVercel />, title: "Vercel" },
-    { icon: <SiSupabase />, title: "Supabase" },
-    { icon: <SiGodotengine />, title: "Godot Engine" },
-    { icon: <SiNpm />, title: "NPM" },
-    { icon: <SiPnpm />, title: "PNPM" },
-    { icon: <SiBun />, title: "Bun" }
-];
-const Badge3D = ({ icon, title }: { icon: React.ReactNode, title: string }) => {
+const Badge3D = ({ icon: Icon, title }: { icon: React.ElementType, title: string }) => {
     return (
         <figure className="relative bg-zinc-100 dark:bg-zinc-900 border rounded-xl
                 hover:translate-y-1 hover:translate-x-0.5 shadow-[7px_5px_0px_0px_rgba(0,0,0,100%)] dark:shadow-[7px_5px_0_0_rgba(255,255,255,70%)]
@@ -112,7 +9,7 @@ const Badge3D = ({ icon, title }: { icon: React.ReactNode, title: string }) => {
             <div className="flex items-center gap-3 p-2">
                 <div
                     className="shadow-md shadow-orange-500/30 dark:shadow-white/30 border rounded-xl p-3">
-                    {icon}
+                    <Icon />
                 </div>
                 <figcaption className="text-foreground font-semibold">{title}</figcaption>
             </div>
@@ -181,5 +78,4 @@ const timeline = [
 ]
 
 
-export default skillsLogo;
-export { drawings, timeline, Badge3D };
+export { timeline, Badge3D };

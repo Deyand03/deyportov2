@@ -4,6 +4,22 @@ import Image from "next/image";
 import { Suspense } from "react";
 import { SiBootstrap, SiCss3, SiDaisyui, SiDart, SiFlutter, SiFramer, SiGithub, SiGodotengine, SiHtml5, SiJavascript, SiLaravel, SiMysql, SiReact, SiSupabase, SiTailwindcss, SiTypescript } from "react-icons/si";
 
+
+interface TechItem {
+    icon: React.ElementType;
+    title: string;
+    className?: string;
+}
+
+interface Project {
+    judul: string;
+    deskripsi: string;
+    techStack: TechItem[];
+    src: string;
+    repo: string;
+    demo: string;
+}
+
 const LazyLoading = () => (
     <div className="w-full h-full flex justify-center items-center">
         <span className="text-lg font-bold text-muted-foreground">Loading...</span>
@@ -42,7 +58,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                             className="flex items-center gap-1 text-[10px] uppercase tracking-wider font-semibold bg-white/20 backdrop-blur-md px-2 py-1 rounded-full border border-white/10"
                             title={tech.title}
                         >
-                            {tech.icon}
+                            <tech.icon className={tech.className} />
                             <span>{tech.title}</span>
                         </div>
                     ))}
@@ -80,104 +96,4 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
     );
 };
 
-interface TechItem {
-    icon: React.ReactNode;
-    title: string;
-}
-
-interface Project {
-    judul: string;
-    deskripsi: string;
-    techStack: TechItem[];
-    src: string;
-    repo: string;
-    demo: string;
-}
-
-const projectsList: Project[] = [
-    {
-        judul: "DeyportoV2",
-        deskripsi: "Website Portofolio kedua yang interaktif dengan React.js dan Three.js.",
-        techStack: [
-            { icon: <SiReact className="text-blue-400" />, title: "React" },
-            { icon: <SiTypescript className="text-blue-600" />, title: "Typescript" },
-            { icon: <SiFramer className="text-pink-500" />, title: "Framer" },
-            { icon: <SiTailwindcss className="text-cyan-400" />, title: "Tailwind" }
-        ],
-        src: "/projects/portov2.png",
-        repo: "https://github.com/Deyand03/deyportov2",
-        demo: "#"
-    },
-    {
-        judul: "KenalBersih",
-        deskripsi: "Sistem Pengelolaan Sampah Desa Mendalo Indah dengan Dashboard & Chatbot.",
-        techStack: [
-            { icon: <SiLaravel className="text-red-500" />, title: "Laravel" },
-            { icon: <SiTailwindcss className="text-cyan-400" />, title: "Tailwind" },
-            { icon: <SiDaisyui className="text-emerald-400" />, title: "DaisyUI" },
-            { icon: <SiMysql className="text-blue-500" />, title: "MySQL" }
-        ],
-        src: "/projects/kenalbersih.png",
-        repo: "https://github.com/Deyand03/kenalbersih",
-        demo: "https://kenalbersih.vercel.app/"
-    },
-    {
-        judul: "Interngate Mobile",
-        deskripsi: "Mobile App pendaftaran magang dengan fitur real-time chat via Supabase.",
-        techStack: [
-            { icon: <SiFlutter className="text-blue-400" />, title: "Flutter" },
-            { icon: <SiDart className="text-blue-500" />, title: "Dart" },
-            { icon: <SiSupabase className="text-green-400" />, title: "Supabase" }
-        ],
-        src: "/projects/interngatemobile.jpg",
-        repo: "https://github.com/Deyand03/singularity",
-        demo: "#"
-    },
-    {
-        judul: "Interngate",
-        deskripsi: "Platform pendaftaran magang mahasiswa dengan Dashboard Mitra yang komprehensif.",
-        techStack: [
-            { icon: <SiLaravel className="text-red-500" />, title: "Laravel" },
-            { icon: <SiTailwindcss className="text-cyan-400" />, title: "Tailwind" }
-        ],
-        src: "/projects/interngate.png",
-        repo: "https://github.com/Deyand03/interngate",
-        demo: "https://interngate.vercel.app"
-    },
-    {
-        judul: "Si-Klinik",
-        deskripsi: "Sistem reservasi klinik online dengan arsitektur Backend as a Service.",
-        techStack: [
-            { icon: <SiLaravel className="text-red-500" />, title: "Laravel" },
-            { icon: <SiJavascript className="text-yellow-400" />, title: "JS" },
-            { icon: <SiTailwindcss className="text-cyan-400" />, title: "Tailwind" }
-        ],
-        src: "/projects/siklinik.png",
-        repo: "https://github.com/Deyand03/klinik-r1",
-        demo: "https://klinikr1.vercel.app/"
-    },
-    {
-        judul: "Deyporto V1",
-        deskripsi: "Jejak awal belajar web development menggunakan HTML, CSS, dan Bootstrap.",
-        techStack: [
-            { icon: <SiHtml5 className="text-orange-500" />, title: "HTML" },
-            { icon: <SiCss3 className="text-blue-500" />, title: "CSS" },
-            { icon: <SiBootstrap className="text-purple-600" />, title: "Bootstrap" }
-        ],
-        src: "/projects/portov1.png",
-        repo: "https://github.com/Deyand03/deyporto",
-        demo: "https://deyporto.vercel.app"
-    },
-    {
-        judul: "Witchy",
-        deskripsi: "Eksperimen Game 2D Platformer menggunakan Godot Engine.",
-        techStack: [
-            { icon: <SiGodotengine className="text-blue-400" />, title: "Godot" }
-        ],
-        src: "/img/placeholder.jpg",
-        repo: "#",
-        demo: "#"
-    }
-];
-
-export { projectsList, ProjectCard };
+export { ProjectCard };

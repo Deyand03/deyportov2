@@ -1,20 +1,12 @@
 "use client";
 
-import { ArrowUp, ArrowUpRight, Mail, MapPin } from "lucide-react";
-import { FaGithub, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
-import Link from "next/link";
+import { ArrowUp, ArrowUpRight, MapPin } from "lucide-react";
+import { socialLinks } from "@/data";
 
 export default function Footer() {
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
-
-    const socials = [
-        { name: "Instagram", href: "https://instagram.com/deyand.__", icon: <FaInstagram /> },
-        { name: "LinkedIn", href: "https://linkedin.com/in/defry03", icon: <FaLinkedin /> },
-        { name: "GitHub", href: "https://github.com/Deyand03", icon: <FaGithub /> },
-        { name: "Twitter", href: "#", icon: <FaTwitter /> },
-    ];
 
     return (
         <footer className="w-full border-t border-black/10 dark:border-white/10 relative z-10">
@@ -43,7 +35,7 @@ export default function Footer() {
                     <div className="flex flex-col gap-4">
                         <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-2">Socials</h3>
                         <div className="flex flex-col gap-3">
-                            {socials.map((social) => (
+                            {socialLinks.map((social) => (
                                 <a
                                     key={social.name}
                                     href={social.href}
@@ -51,7 +43,7 @@ export default function Footer() {
                                     rel="noopener noreferrer"
                                     className="group flex items-center gap-2 w-fit text-muted-foreground hover:text-foreground transition-colors"
                                 >
-                                    <span className="group-hover:scale-110 transition-transform duration-200">{social.icon}</span>
+                                    <span className="group-hover:scale-110 transition-transform duration-200"><social.icon /></span>
                                     <span>{social.name}</span>
                                     <ArrowUpRight size={12} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                                 </a>

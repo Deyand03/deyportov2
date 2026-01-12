@@ -7,7 +7,8 @@ import { IoPerson, IoTime } from "react-icons/io5";
 import { Marquee } from "../ui/marquee";
 import Masonry from "../Masonry";
 import { Timeline } from "../ui/timeline";
-import skillsLogo, { drawings, timeline, Badge3D } from "../subcomponent/SubAbout";
+import { timeline, Badge3D } from "../subcomponent/SubAbout";
+import { skillsList, drawingsList } from "@/data";
 import useSound from "use-sound";
 
 const About = () => {
@@ -22,11 +23,11 @@ const About = () => {
     const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
     const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
-    const col1 = skillsLogo.slice(0, skillsLogo.length / 2);
-    const col2 = skillsLogo.slice(skillsLogo.length / 2);
-    const col3 = skillsLogo.slice(0, skillsLogo.length / 3);
-    const col4 = skillsLogo.slice(skillsLogo.length / 3);
-    const col5 = skillsLogo.slice(0, skillsLogo.length / 4);
+    const col1 = skillsList.slice(0, skillsList.length / 2);
+    const col2 = skillsList.slice(skillsList.length / 2);
+    const col3 = skillsList.slice(0, skillsList.length / 3);
+    const col4 = skillsList.slice(skillsList.length / 3);
+    const col5 = skillsList.slice(0, skillsList.length / 4);
 
     return (
         <section ref={aboutRef} className="min-h-screen w-full relative overflow-hidden py-20" onClick={() => play()} id="about">
@@ -156,7 +157,7 @@ const About = () => {
                                 </figure>
                             </div>
                             <Masonry
-                                items={drawings}
+                                items={drawingsList}
                                 ease="power3.out"
                                 duration={0.6}
                                 stagger={0.05}

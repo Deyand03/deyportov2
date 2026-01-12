@@ -1,6 +1,6 @@
-"use client";
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import Image from 'next/image';
 
 const useMedia = (queries: string[], values: number[], defaultValue: number): number => {
   const [value, setValue] = useState<number>(defaultValue);
@@ -41,22 +41,10 @@ const useMeasure = <T extends HTMLElement>() => {
   return [ref, size] as const;
 };
 
-const preloadImages = async (urls: string[]): Promise<void> => {
-  await Promise.all(
-    urls.map(
-      src =>
-        new Promise<void>(resolve => {
-          const img = new Image();
-          img.src = src;
-          img.onload = img.onerror = () => resolve();
-        })
-    )
-  );
-};
-
 interface Item {
   id: string;
   img: string;
+  title?: string;
   url: string;
   height: number;
 }
@@ -98,7 +86,6 @@ const Masonry: React.FC<MasonryProps> = ({
   );
 
   const [containerRef, { width }] = useMeasure<HTMLDivElement>();
-  const [imagesReady, setImagesReady] = useState(false);
 
   const getInitialPosition = (item: GridItem) => {
     const containerRect = containerRef.current?.getBoundingClientRect();
@@ -129,10 +116,6 @@ const Masonry: React.FC<MasonryProps> = ({
     }
   };
 
-  useEffect(() => {
-    preloadImages(items.map(i => i.img)).then(() => setImagesReady(true));
-  }, [items]);
-
   const grid = useMemo<GridItem[]>(() => {
     if (!width) return [];
     const colHeights = new Array(columns).fill(0);
@@ -154,14 +137,14 @@ const Masonry: React.FC<MasonryProps> = ({
   const containerHeight = useMemo(() => {
     if (grid.length === 0) return 0;
     const maxHeight = Math.max(...grid.map(item => item.y + item.h));
-    
-    return maxHeight + 20; 
+
+    return maxHeight + 20;
   }, [grid]);
 
   const hasMounted = useRef(false);
 
   useLayoutEffect(() => {
-    if (!imagesReady) return;
+    if (grid.length === 0) return;
 
     grid.forEach((item, index) => {
       const selector = `[data-key="${item.id}"]`;
@@ -199,7 +182,7 @@ const Masonry: React.FC<MasonryProps> = ({
     });
 
     hasMounted.current = true;
-  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
+  }, [grid, stagger, animateFrom, blurToFocus, duration, ease]);
 
   const handleMouseEnter = (id: string, element: HTMLElement) => {
     if (scaleOnHover) {
@@ -230,24 +213,26 @@ const Masonry: React.FC<MasonryProps> = ({
   };
 
   return (
-    <div ref={containerRef} className="relative w-full" style={{height: containerHeight > 0 ? containerHeight : 'auto'}}>
+    <div ref={containerRef} className="relative w-full" style={{ height: containerHeight > 0 ? containerHeight : 'auto' }}>
       {grid.map(item => (
         <div
           key={item.id}
           data-key={item.id}
-          className="absolute box-content"
+          className="absolute box-content cursor-pointer overflow-hidden rounded-[10px] shadow-[0px_10px_50px_-10px_rgba(0,0,0,0.2)]"
           style={{ willChange: 'transform, width, height, opacity' }}
           onMouseEnter={e => handleMouseEnter(item.id, e.currentTarget)}
           onMouseLeave={e => handleMouseLeave(item.id, e.currentTarget)}
         >
-          <div
-            className="relative w-full h-full bg-cover bg-center rounded-[10px] shadow-[0px_10px_50px_-10px_rgba(0,0,0,0.2)] uppercase text-[10px] leading-2.5"
-            style={{ backgroundImage: `url(${item.img})` }}
-          >
-            {colorShiftOnHover && (
-              <div className="color-overlay absolute inset-0 rounded-[10px] bg-linear-to-tr from-pink-500/50 to-sky-500/50 opacity-0 pointer-events-none" />
-            )}
-          </div>
+          <Image
+            src={item.img}
+            alt={item.title || "Art Gallery Item"}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 50vw, 33vw"
+          />
+          {colorShiftOnHover && (
+            <div className="color-overlay absolute inset-0 rounded-[10px] bg-linear-to-tr from-pink-500/50 to-sky-500/50 opacity-0 pointer-events-none z-10" />
+          )}
         </div>
       ))}
     </div>

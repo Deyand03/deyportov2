@@ -18,10 +18,7 @@ import useSound from "use-sound";
 
 const Hero = () => {
     const heroRef = useRef<HTMLDivElement>(null);
-    const { scrollY } = useScroll({
-        target: heroRef,
-        offset: ["end end", "end start"]
-    });
+    const { scrollY } = useScroll();
     const [play] = useSound('/sounds/switch.mp3')
     
     const scale = useTransform(scrollY, [0, 1000], [1, 0.8]);

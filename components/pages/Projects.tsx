@@ -1,7 +1,8 @@
 "use client";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
-import { ProjectCard, projectsList } from "../subcomponent/SubProjects";
+import { ProjectCard } from "../subcomponent/SubProjects";
+import { projectsData } from "@/data";
 import useSound from "use-sound";
 
 const Projects = () => {
@@ -32,7 +33,7 @@ const Projects = () => {
                 </div>
                 {/* Grid Layout */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projectsList.map((project, index) => (
+                    {projectsData.map((project, index) => (
                         <ProjectCard key={index} project={project} index={index} />
                     ))}
                 </div>

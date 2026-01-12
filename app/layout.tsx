@@ -15,7 +15,25 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Defry | Portofolio",
-  description: "Halo, saya Defry Yandy, seorang Fullstack Developer dan juga Game Developer",
+  description: "Halo, saya Defry Yandy, seorang Fullstack Developer dan juga Game Developer.",
+  keywords: ["Defry Yandy", "Portfolio", "Web Developer", "Game Developer", "React", "Next.js", "Jambi"],
+  authors: [{ name: "Defry Yandy", url: "https://deyportov2.vercel.app" }],
+  openGraph: {
+    title: "Defry | Portofolio",
+    description: "Halo, saya Defry Yandy, seorang Fullstack Developer dan juga Game Developer.",
+    url: "https://deyportov2.vercel.app",
+    siteName: "Defry Yandy Portfolio",
+    images: [
+      {
+        url: "/projects/portov2.png",
+        width: 1200,
+        height: 630,
+        alt: "Defry Yandy Portfolio",
+      },
+    ],
+    locale: "id_ID",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
