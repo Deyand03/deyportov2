@@ -1,11 +1,12 @@
 "use client";
 
 import useSound from "use-sound";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowUpRight, Copy, Check, Send, Loader2 } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import Link from "next/link";
+import emailjs from "@emailjs/browser"
 
 const SocialLink = ({ href, label, icon }: { href: string; label: string; icon: React.ReactNode }) => (
     <Link 
@@ -24,8 +25,9 @@ const SocialLink = ({ href, label, icon }: { href: string; label: string; icon: 
 const Contact = () => {
     const [play] = useSound('/sounds/switch.mp3');
     const [form, setForm] = useState({ name: "", email: "", message: "" });
-    const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
+    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [copied, setCopied] = useState(false);
+    const formRef = useRef<HTMLFormElement>(null);
 
     const handleCopy = () => {
         navigator.clipboard.writeText("defryyandy7@gmail.com");
@@ -35,18 +37,34 @@ const Contact = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        if(!formRef.current) return
+
         setStatus("loading");
-        // Simulasi kirim
-        setTimeout(() => {
+
+        emailjs.sendForm(
+            process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+            process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+            formRef.current,
+            {
+                publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+            }
+        )
+        .then(() => {
             setStatus("success");
-            setForm({ name: "", email: "", message: "" });
+            setForm({name: "", email: "", message: ""});
+            formRef.current?.reset();
+
             setTimeout(() => setStatus("idle"), 3000);
-        }, 1500);
+        })
+        .catch((error) => {
+            console.log("Error: ", error);
+            setStatus("error");
+            setTimeout(() => setStatus("idle"), 3000);
+        })
     };
 
     return (
         <section onClick={() => play()} id="contact" className="w-full relative">
-            
             {/* Header */}
             <header className="px-6 md:px-20 pt-20">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 border-b border-black/10 dark:border-white/10 pb-6">
@@ -125,12 +143,13 @@ const Contact = () => {
 
                     {/* RIGHT: Minimalist Form */}
                     <div className="bg-gray-50 dark:bg-white/5 p-8 rounded-2xl border border-black/5 dark:border-white/5">
-                        <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+                        <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-8">
                             <div className="space-y-6">
                                 <div className="flex flex-col gap-2">
                                     <label className="text-xs uppercase tracking-wider font-bold text-muted-foreground">Your Name</label>
                                     <input 
-                                        type="text" 
+                                        type="text"
+                                        name="from_name"
                                         required
                                         value={form.name}
                                         onChange={(e) => setForm({...form, name: e.target.value})}
@@ -141,7 +160,8 @@ const Contact = () => {
                                 <div className="flex flex-col gap-2">
                                     <label className="text-xs uppercase tracking-wider font-bold text-muted-foreground">Email Address</label>
                                     <input 
-                                        type="email" 
+                                        type="email"
+                                        name="from_email" 
                                         required
                                         value={form.email}
                                         onChange={(e) => setForm({...form, email: e.target.value})}
@@ -154,6 +174,7 @@ const Contact = () => {
                                     <textarea 
                                         required
                                         rows={4}
+                                        name="message"
                                         value={form.message}
                                         onChange={(e) => setForm({...form, message: e.target.value})}
                                         className="w-full bg-transparent border-b border-black/20 dark:border-white/20 py-4 text-xl outline-none focus:border-black dark:focus:border-white transition-colors resize-none placeholder:text-black/20 dark:placeholder:text-white/20"
@@ -173,6 +194,11 @@ const Contact = () => {
                                     <>
                                         <span>Message Sent</span>
                                         <Check className="w-5 h-5" />
+                                    </>
+                                ) : status === "error" ? (
+                                    <>
+                                        <span>Failed (Try Again)</span>
+                                        <span className="text-red-500 text-lg">!</span>
                                     </>
                                 ) : (
                                     <>
