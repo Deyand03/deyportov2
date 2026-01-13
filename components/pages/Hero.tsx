@@ -61,11 +61,11 @@ const Hero = () => {
                             </h1>
                         </div>
 
-                        <div className="flex items-center gap-2 text-xl md:text-3xl font-semibold text-gray-700 dark:text-gray-300">
-                            <span>I&apos;m an</span>
+                        <div className="flex justify-center md:justify-normal w-full items-center gap-2 text-xl md:text-3xl font-semibold text-gray-700 dark:text-gray-300">
+                            <span className="text-center md:text-left">I&apos;m</span>
                             <div className="text-yellow-500 dark:text-blue-400 min-w-50 text-left">
                                 <TextType
-                                    text={["Web Developer.", "Game Developer.", "Artist."]}
+                                    text={["a Web Developer.", "a Game Developer.", "an Artist."]}
                                     className="inline-block"
                                 />
                             </div>
