@@ -1,8 +1,8 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import { Suspense } from "react";
-import { SiBootstrap, SiCss, SiDaisyui, SiDart, SiFlutter, SiFramer, SiGithub, SiGodotengine, SiHtml5, SiJavascript, SiLaravel, SiMysql, SiReact, SiSupabase, SiTailwindcss, SiTypescript } from "react-icons/si";
+import { SiBootstrap, SiCss3, SiDaisyui, SiDart, SiFlutter, SiFramer, SiGithub, SiGodotengine, SiHtml5, SiJavascript, SiLaravel, SiMysql, SiReact, SiSupabase, SiTailwindcss, SiTypescript } from "react-icons/si";
 
 
 interface TechItem {

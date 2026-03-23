@@ -4,7 +4,7 @@ import {
     SiReact, SiLaravel, SiMysql, SiPostgresql, SiTypescript, SiPhp,
     SiJavascript, SiHtml5, SiTailwindcss, SiPython, SiMediapipe,
     SiFramer, SiGithub, SiGit, SiVercel, SiSupabase, SiGodotengine,
-    SiNpm, SiPnpm, SiBun, SiDaisyui, SiDart, SiFlutter, SiBootstrap, SiCss
+    SiNpm, SiPnpm, SiBun, SiDaisyui, SiDart, SiFlutter, SiBootstrap, SiCss3
 } from "react-icons/si";
 
 // --- SOCIAL LINKS ---
@@ -107,7 +107,7 @@ export const projectsData = [
         deskripsi: "Jejak awal belajar web development menggunakan HTML, CSS, dan Bootstrap.",
         techStack: [
             { icon: SiHtml5, title: "HTML", className: "text-orange-500" },
-            { icon: SiCss, title: "CSS", className: "text-blue-500" },
+            { icon: SiCss3, title: "CSS", className: "text-blue-500" },
             { icon: SiBootstrap, title: "Bootstrap", className: "text-purple-600" }
         ],
         src: "/projects/portov1.png",

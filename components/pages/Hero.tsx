@@ -13,7 +13,7 @@ import {
 import { Shine } from "../animate-ui/primitives/effects/shine";
 import { useRef } from "react";
 import { OrbitingCircles } from "../ui/orbiting-circles";
-import { SiCss, SiFramer, SiGodotengine, SiHtml5, SiJavascript, SiMysql, SiPhp, SiPostgresql, SiReact, SiSupabase, SiTailwindcss, SiTypescript } from "react-icons/si";
+import { SiCss3, SiFramer, SiGodotengine, SiHtml5, SiJavascript, SiMysql, SiPhp, SiPostgresql, SiReact, SiSupabase, SiTailwindcss, SiTypescript } from "react-icons/si";
 import useSound from "use-sound";
 
 const Hero = () => {
@@ -130,7 +130,7 @@ const Hero = () => {
                             <SiSupabase size={30} />
                             <SiPostgresql size={30} />
                             <SiTailwindcss size={30} />
-                            <SiCss size={30} />
+                            <SiCss3 size={30} />
                         </OrbitingCircles>
                         <OrbitingCircles radius={50}>
                             <SiMysql size={20} />
