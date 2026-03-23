@@ -19,7 +19,6 @@ const About = () => {
         offset: ["end end", "end start"]
     });
 
-    const blur = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(10px)"]);
     const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
     const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
@@ -32,7 +31,7 @@ const About = () => {
     return (
         <section ref={aboutRef} className="min-h-screen w-full relative overflow-hidden py-20" onClick={() => play()} id="about">
             <motion.div
-                style={{ scale, opacity, filter: blur }}
+                style={{ scale, opacity }}
             >
                 {/* Header Section   */}
                 <div className="px-4 md:px-20 pb-20">

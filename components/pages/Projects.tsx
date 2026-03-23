@@ -14,11 +14,10 @@ const Projects = () => {
     const [play] = useSound('/sounds/switch.mp3')
     const scale = useTransform(scrollYProgress, [0, 1], [1, 0.85]);
     const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-    const blur = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(5px)"]);
 
     return (
         <section ref={projectsRef} className="w-full min-h-screen py-20 relative" onClick={() => play()} id="projects">
-            <motion.div style={{ scale, opacity, filter: blur }} className="px-4 md:px-20">
+            <motion.div style={{ scale, opacity }} className="px-4 md:px-20">
 
                 {/* Header Section */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 border-b border-black/10 dark:border-white/10 pb-6">

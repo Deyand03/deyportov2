@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, Transition } from "framer-motion";
+import { motion, Transition } from "motion/react";
 import { useEffect, useState } from "react";
 
 const transitionAnim: Transition = {
@@ -19,7 +19,7 @@ export default function SplashScreenProvider({ children, splashContent }: Splash
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsLoading(false);
-        }, 5000);
+        }, 3000);
 
         return () => clearTimeout(timer);
     }, []);

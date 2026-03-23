@@ -4,9 +4,6 @@ import * as React from 'react';
 import {
   type HTMLMotionProps,
   motion,
-  useMotionValue,
-  useSpring,
-  type SpringOptions,
   type Transition,
 } from 'motion/react';
 
@@ -72,9 +69,7 @@ function StarLayer({
 }
 
 type StarsBackgroundProps = React.ComponentProps<'div'> & {
-  factor?: number;
   speed?: number;
-  transition?: SpringOptions;
   starColor?: string;
   pointerEvents?: boolean;
 };
@@ -82,31 +77,11 @@ type StarsBackgroundProps = React.ComponentProps<'div'> & {
 function StarsBackground({
   children,
   className,
-  factor = 0.05,
   speed = 50,
-  transition = { stiffness: 50, damping: 20 },
   starColor = '#fff',
   pointerEvents = true,
   ...props
 }: StarsBackgroundProps) {
-  const offsetX = useMotionValue(1);
-  const offsetY = useMotionValue(1);
-
-  const springX = useSpring(offsetX, transition);
-  const springY = useSpring(offsetY, transition);
-
-  const handleMouseMove = React.useCallback(
-    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-      const newOffsetX = -(e.clientX - centerX) * factor;
-      const newOffsetY = -(e.clientY - centerY) * factor;
-      offsetX.set(newOffsetX);
-      offsetY.set(newOffsetY);
-    },
-    [offsetX, offsetY, factor],
-  );
-
   return (
     <div
       data-slot="stars-background"
@@ -114,21 +89,17 @@ function StarsBackground({
         'relative size-full overflow-hidden bg-[radial-gradient(ellipse_at_bottom,_#262626_0%,_#000_100%)]',
         className,
       )}
-      onMouseMove={handleMouseMove}
       {...props}
     >
-      <motion.div
-        style={{ x: springX, y: springY }}
-        className={cn({ 'pointer-events-none': !pointerEvents })}
-      >
+      <div className={cn({ 'pointer-events-none': !pointerEvents })}>
         <StarLayer
-          count={1000}
+          count={400}
           size={1}
           transition={{ repeat: Infinity, duration: speed, ease: 'linear' }}
           starColor={starColor}
         />
         <StarLayer
-          count={400}
+          count={150}
           size={2}
           transition={{
             repeat: Infinity,
@@ -138,7 +109,7 @@ function StarsBackground({
           starColor={starColor}
         />
         <StarLayer
-          count={200}
+          count={50}
           size={3}
           transition={{
             repeat: Infinity,
@@ -147,7 +118,7 @@ function StarsBackground({
           }}
           starColor={starColor}
         />
-      </motion.div>
+      </div>
       {children}
     </div>
   );

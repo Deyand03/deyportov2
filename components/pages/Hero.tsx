@@ -13,7 +13,7 @@ import {
 import { Shine } from "../animate-ui/primitives/effects/shine";
 import { useRef } from "react";
 import { OrbitingCircles } from "../ui/orbiting-circles";
-import { SiCss3, SiFramer, SiGodotengine, SiHtml5, SiJavascript, SiMysql, SiPhp, SiPostgresql, SiReact, SiSupabase, SiTailwindcss, SiTypescript } from "react-icons/si";
+import { SiCss, SiFramer, SiGodotengine, SiHtml5, SiJavascript, SiMysql, SiPhp, SiPostgresql, SiReact, SiSupabase, SiTailwindcss, SiTypescript } from "react-icons/si";
 import useSound from "use-sound";
 
 const Hero = () => {
@@ -23,12 +23,11 @@ const Hero = () => {
     
     const scale = useTransform(scrollY, [0, 1000], [1, 0.8]);
     const opacity = useTransform(scrollY, [0, 1000], [1, 0]);
-    const blur = useTransform(scrollY, [0, 1000], ["blur(0px)", "blur(4px)"]);
 
     return (
         <section ref={heroRef} className="w-full h-screen overflow-hidden px-0 md:px-16" onClick={() => play()} id="hero">
             <motion.div
-                style={{ scale, opacity, filter: blur }}
+                style={{ scale, opacity }}
                 className="w-full h-full relative"
             >
                 
@@ -131,7 +130,7 @@ const Hero = () => {
                             <SiSupabase size={30} />
                             <SiPostgresql size={30} />
                             <SiTailwindcss size={30} />
-                            <SiCss3 size={30} />
+                            <SiCss size={30} />
                         </OrbitingCircles>
                         <OrbitingCircles radius={50}>
                             <SiMysql size={20} />
